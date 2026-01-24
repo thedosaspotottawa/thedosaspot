@@ -4,6 +4,7 @@ from typing import List
 from database import get_db
 from models import ReservationDB
 from schemas import Reservation, ReservationStatusUpdate
+from auth import verify_admin
 
 router = APIRouter(prefix="/reservations", tags=["reservations"])
 
@@ -33,8 +34,7 @@ async def update_reservation_status(
     update_data: ReservationStatusUpdate, 
     db: Session = Depends(get_db)
 ):
-    if update_data.password != "dosa123":
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid password")
+    verify_admin(update_data.password)
     
     db_res = db.query(ReservationDB).filter(ReservationDB.id == reservation_id).first()
     if not db_res:

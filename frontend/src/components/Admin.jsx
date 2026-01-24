@@ -73,11 +73,16 @@ function Admin() {
         }
     };
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (password === 'dosa123') { // Simple password for demo
-            setIsAuthenticated(true);
-        } else {
+        try {
+            const response = await axios.post(`${API_URL}/auth/login`, { password });
+            if (response.data.success) {
+                setIsAuthenticated(true);
+            } else {
+                alert('Invalid credentials');
+            }
+        } catch (err) {
             alert('Invalid credentials');
         }
     };

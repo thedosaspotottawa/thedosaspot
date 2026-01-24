@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from database import engine, Base, SessionLocal, DATA_DIR
 from models import CategoryDB, MenuItemDB, BannerDB
 from routers import menu, reservations, banners
+from auth import verify_admin, AdminLoginRequest, AdminLoginResponse
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -38,6 +39,14 @@ def read_root():
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+
+@app.post("/auth/login", response_model=AdminLoginResponse)
+async def admin_login(request: AdminLoginRequest):
+    try:
+        verify_admin(request.password)
+        return {"success": True, "message": "Authentication successful"}
+    except Exception:
+        return {"success": False, "message": "Invalid password"}
 
 # --- Seeding ---
 def seed_banners(db: Session):

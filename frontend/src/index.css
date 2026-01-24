@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+
+:root {
+  --coffee-bean: #3E2723;
+  --sunflower-yellow: #FFB300;
+  --dark-slate-grey: #2F4F4F;
+  --silver: #C0C0C0;
+  --graphite: #383838;
+}
+
+@theme {
+  --color-coffee-bean: var(--coffee-bean);
+  --color-sunflower: var(--sunflower-yellow);
+  --color-slate-grey: var(--dark-slate-grey);
+  --color-silver: var(--silver);
+  --color-graphite: var(--graphite);
+}
+
+body {
+  @apply text-coffee-bean font-sans;
+}
+
+h1,
+h2 {
+  font-family: "Twinkle Star", cursive;
+}
+
+.header-text-regular {
+  font-family: "Twinkle Star", cursive;
+  font-weight: 400;
+  font-style: normal;
+}

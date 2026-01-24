@@ -1,0 +1,10 @@
+[
+    {
+        "message": "website is in progress some functionality may not work",
+        "active": true
+    },
+    {
+        "message": "hours may differ due to weather, check store open status before coming",
+        "active": true
+    }
+]

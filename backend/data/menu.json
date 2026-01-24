@@ -1,0 +1,1161 @@
+{
+  "categories": [
+    {
+      "name": "Soups",
+      "items": [
+        {
+          "name": "Tomato Soup",
+          "price": 9,
+          "description": "A comforting bowl of rich, velvety tomato soup, made from sun-ripened tomatoes, slow-cooked with aromatic herbs and a touch of cream."
+        },
+        {
+          "name": "Lentil Soup",
+          "price": 10,
+          "description": "A smooth, savoury blend of lentils and delicate spices, finished with herbs for a comforting start."
+        },
+        {
+          "name": "Veg Soup",
+          "price": 10,
+          "description": "A delicate blend of garden-fresh vegetables in a light, aromatic subtly seasoned broth."
+        },
+        {
+          "name": "Sweet Corn Soup",
+          "price": 12,
+          "description": "A delightful blend of tender sweet corn kernels in a silky, savory broth, gently seasoned with aromatic spices."
+        },
+        {
+          "name": "Chicken Soup",
+          "price": 13,
+          "description": "A heartwarming bowl of tender chicken, slow-simmered with fresh vegetables, fragrant herbs, and a flavorful broth."
+        },
+        {
+          "name": "Mutton Soup",
+          "price": 13,
+          "description": "A robust and flavorful soup made with tender, slow-cooked mutton, infused with aromatic spices and herbs.",
+          "spicy": true
+        }
+      ]
+    },
+    {
+      "name": "Salads",
+      "items": [
+        {
+          "name": "Mix Veg Salad",
+          "price": 14,
+          "description": ""
+        },
+        {
+          "name": "Chicken Tikka Salad",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Chickpea Salad",
+          "price": 13,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Appetizers - Veg",
+      "items": [
+        {
+          "name": "Veg Pakkora",
+          "price": 11,
+          "description": "Crisp, golden-fried vegetables, delicately spiced and served with a zesty chutney.",
+          "spicy": true
+        },
+        {
+          "name": "Paneer Pakkora",
+          "price": 13,
+          "description": "Golden-brown fritters feature cubes of fresh paneer, coated in a spiced gram flour batter and deep-fried to perfection."
+        },
+        {
+          "name": "Paneer 65",
+          "price": 15,
+          "description": "Crisp, golden-fried paneer cubes tossed in a blend of bold spices and curry leaves."
+        },
+        {
+          "name": "Gobi 65",
+          "price": 13,
+          "description": "A spicy and crispy delight featuring tender cauliflower florets marinated in a flavorful blend of spices, coated in a light batter, and deep-fried to golden perfection."
+        },
+        {
+          "name": "Onion Bhaji",
+          "price": 11,
+          "description": "Crisp, golden-brown fritters made with finely sliced onions and a blend of aromatic spices."
+        },
+        {
+          "name": "Aloo Bhaji",
+          "price": 9,
+          "description": "Crisp, spiced potato fritters, served with a tangy accompaniment for a perfect bite."
+        },
+        {
+          "name": "Medu Vada",
+          "price": 9,
+          "description": "Crispy, savory lentil doughnuts, served with coconut chutney and sambar."
+        },
+        {
+          "name": "Samosa",
+          "price": 7,
+          "description": "Golden, flaky pastry filled with spiced potatoes and peas."
+        },
+        {
+          "name": "Samosa Chaat",
+          "price": 15,
+          "description": "Crispy samosas topped with tangy and spicy sauce."
+        }
+      ]
+    },
+    {
+      "name": "Appetizers - Non Veg",
+      "items": [
+        {
+          "name": "Omlette",
+          "price": 8,
+          "description": "Fluffy, delicately cooked omelette with a blend of fine herbs and seasonal ingredients.",
+          "spicy": true
+        },
+        {
+          "name": "Kalakki",
+          "price": 8,
+          "description": "Soft, spiced egg pancakes wrapped in a thin, crispy crepe.",
+          "spicy": true
+        },
+        {
+          "name": "Egg Mass",
+          "price": 11,
+          "description": "Soft-boiled eggs simmered in a rich gravy, giving a perfect blend of spices."
+        },
+        {
+          "name": "Egg Bhaji",
+          "price": 11,
+          "description": "Soft, spiced scrambled eggs, sautéed to perfection and served with a flavorful garnish."
+        },
+        {
+          "name": "Chicken Pakkora",
+          "price": 13,
+          "description": "Tender chicken pieces coated in a spiced, crispy batter, served with a tangy sauce."
+        },
+        {
+          "name": "Chicken 65",
+          "price": 15,
+          "description": "Tender chicken, marinated in bold spices and deep-fried to perfection."
+        },
+        {
+          "name": "Fish Pakkora",
+          "price": 15,
+          "description": "Crispy, golden-battered fish fillets, seasoned with aromatic spices and served with a dip."
+        },
+        {
+          "name": "Tawa Fish Fry",
+          "price": 18,
+          "description": "Delicately spiced and pan-fried Tara fish, served crispy with a fragrant, tangy garnish."
+        },
+        {
+          "name": "Shrimp Pakkora",
+          "price": 15,
+          "description": "Succulent shrimp coated in a spiced, crisp batter, served with a zesty dipping sauce."
+        },
+        {
+          "name": "Shrimp 65",
+          "price": 15,
+          "description": "Succulent shrimp, marinated in bold spices and fried to a crisp, served with a fragrant garnish."
+        }
+      ]
+    },
+    {
+      "name": "Dosas - Veg",
+      "items": [
+        {
+          "name": "Plain Dosa",
+          "price": 12,
+          "description": ""
+        },
+        {
+          "name": "Set Dosa",
+          "price": 13,
+          "description": ""
+        },
+        {
+          "name": "Masala Dosa",
+          "price": 14,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Paper Dosa",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Podi Dosa",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Ghee Roast",
+          "price": 15,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Ghee Masala Dosa",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Butter Masala Dosa",
+          "price": 16,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Paper Masala Dosa",
+          "price": 16,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Ghee Podi Roast",
+          "price": 17,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Ghee Podi Masala Dosa",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Mysore Masala Dosa",
+          "price": 17,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Mysore Cheese Masala Dosa",
+          "price": 18,
+          "description": ""
+        },
+        {
+          "name": "Mysore Paneer Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Paneer Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Mushroom Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Corriander Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Family Dosa",
+          "price": 21,
+          "description": ""
+        },
+        {
+          "name": "Spinach Masala Dosa",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Spinach Cheese Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Spinach Paneer Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Chilly Garlic Masala Dosa",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Cheese Garlic Masala Dosa",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Onion Masala Dosa",
+          "price": 15,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Chilli Cheese Onion Masala Dosa",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Channa Masala Dosa",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Okra Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Spring Mix Veg Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Hyderabadi Gongura Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Cheese Paneer Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Chettinadu Masala Dosa",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Mirchi Masala Dosa",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Pav Bhaji Masala Dosa",
+          "price": 16,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Dosas - Non Veg",
+      "items": [
+        {
+          "name": "Egg Dosa",
+          "price": 16,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Egg Masala Dosa",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Chicken Masala Dosa",
+          "price": 18,
+          "description": ""
+        },
+        {
+          "name": "Chicken Tikka Masala Dosa",
+          "price": 18,
+          "description": ""
+        },
+        {
+          "name": "Lamb Masala Dosa",
+          "price": 21,
+          "description": ""
+        },
+        {
+          "name": "Butter Chicken Masala Dosa",
+          "price": 21,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Uttapam",
+      "items": [
+        {
+          "name": "Plain Uttapam",
+          "price": 13,
+          "description": "Fluffy pancake made with a fermented batter of rice and lentils served with toppings of your choice."
+        },
+        {
+          "name": "Onion Uttapam",
+          "price": 14,
+          "description": ""
+        },
+        {
+          "name": "Chilly Onion Uttapam",
+          "price": 14,
+          "description": ""
+        },
+        {
+          "name": "Chilly Onion Tomato Uttapam",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Peas Uttapam",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Mix Veg Uttapam",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Masala Uttapam",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Cheese Uttapam",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Pizza Uttapam",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Chicken Curry Uttapam",
+          "price": 18,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Dosas - Kids Special",
+      "items": [
+        {
+          "name": "Cone Dosa",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Strawberry Dosa",
+          "price": 11,
+          "description": ""
+        },
+        {
+          "name": "Chocolate Dosa",
+          "price": 11,
+          "description": ""
+        },
+        {
+          "name": "Small Cheese Dosa",
+          "price": 8,
+          "description": ""
+        },
+        {
+          "name": "Small Ghee Dosa",
+          "price": 8,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Rava Dosas",
+      "items": [
+        {
+          "name": "Plain Rava Dosa",
+          "price": 16,
+          "description": "Thin crispy fried crepe made with semolina, rice flour, ghee and spices.",
+          "spicy": true
+        },
+        {
+          "name": "Rava Masala Dosa",
+          "price": 17,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Onion Rava Masala Dosa",
+          "price": 18,
+          "description": ""
+        },
+        {
+          "name": "Chilly Onion Rava Masala Dosa",
+          "price": 18,
+          "description": ""
+        },
+        {
+          "name": "Rava Podi Masala Dosa",
+          "price": 19,
+          "description": ""
+        },
+        {
+          "name": "Rava Paneer Masala Dosa",
+          "price": 21,
+          "description": ""
+        },
+        {
+          "name": "Rava Butter Masala Dosa",
+          "price": 19,
+          "description": ""
+        },
+        {
+          "name": "Rava Ghee Masala Dosa",
+          "price": 19,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Idly",
+      "items": [
+        {
+          "name": "Idly",
+          "price": 13,
+          "description": "Soft, steamed rice cakes typically served with chutney and sambar on the side."
+        },
+        {
+          "name": "Podi Idly",
+          "price": 13,
+          "description": "Steamed rice cakes coated with a spicy, gun powder."
+        },
+        {
+          "name": "Ghee Podi Idly",
+          "price": 15,
+          "description": "Idly served with a rich, fragrant ghee and gun powder."
+        },
+        {
+          "name": "Rasam Idly",
+          "price": 14,
+          "description": "Idly soaked in a tangy, spiced tomato-based broth called rasam."
+        },
+        {
+          "name": "Sambar Idly",
+          "price": 14,
+          "description": "Idly soaked in a flavourful, spicy lentil soup called sambar.",
+          "spicy": true
+        }
+      ]
+    },
+    {
+      "name": "Vada",
+      "items": [
+        {
+          "name": "Rasam Vada",
+          "price": 14,
+          "description": "Vada soaked in a tangy, spicy broth called rasam."
+        },
+        {
+          "name": "Sambar Vada",
+          "price": 14,
+          "description": "Vada soaked in a spiced lentil soup called sambar."
+        },
+        {
+          "name": "Curd Vada",
+          "price": 14,
+          "description": "Vada soaked in yogurt and seasoned with spices."
+        },
+        {
+          "name": "Idly and Vada Combo (2pcs)",
+          "price": 15,
+          "description": "Idly and crispy, fried doughnuts (vada) with chutneys and sambar."
+        }
+      ]
+    },
+    {
+      "name": "Tandoori",
+      "items": [
+        {
+          "name": "Chicken Tandoori Half (4pcs)",
+          "price": 12,
+          "description": ""
+        },
+        {
+          "name": "Chicken Tandoor Full",
+          "price": 24,
+          "description": ""
+        },
+        {
+          "name": "Chicken Tikka Half (5pcs)",
+          "price": 12,
+          "description": ""
+        },
+        {
+          "name": "Chicken Tikka Full",
+          "price": 24,
+          "description": ""
+        },
+        {
+          "name": "Shrimp Tandoori",
+          "price": 25,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Kothu Specials",
+      "items": [
+        {
+          "name": "Veg Kothu",
+          "price": 19,
+          "description": ""
+        },
+        {
+          "name": "Egg Kothu",
+          "price": 20,
+          "description": ""
+        },
+        {
+          "name": "Chicken Kothu",
+          "price": 22,
+          "description": ""
+        },
+        {
+          "name": "Shrimp Kothu",
+          "price": 23,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Breads",
+      "items": [
+        {
+          "name": "Butter Naan",
+          "price": 2.50,
+          "description": ""
+        },
+        {
+          "name": "Parotta",
+          "price": 2.50,
+          "description": "",
+          "spicy": true
+        },
+        {
+          "name": "Chapathi",
+          "price": 2.50,
+          "description": ""
+        },
+        {
+          "name": "Poori Bhaji",
+          "price": 19,
+          "description": ""
+        },
+        {
+          "name": "Chola Bhatura",
+          "price": 21,
+          "description": ""
+        },
+        {
+          "name": "Veech Parotta",
+          "price": 10,
+          "description": "Multi Layered thin flat bread folded before parotta is tawa-fried.",
+          "spicy": true
+        },
+        {
+          "name": "Chicken Murudhaba",
+          "price": 12,
+          "description": "Crispy skin flat bread stuffed with chicken cooked in wonderful spices and curry."
+        },
+        {
+          "name": "Mutton Murudhaba",
+          "price": 12,
+          "description": "Crispy skin flat bread stuffed with mutton cooked in wonderful spices and curry."
+        }
+      ]
+    },
+    {
+      "name": "Biriyani",
+      "items": [
+        {
+          "name": "Veg Biriyani",
+          "price": 16,
+          "description": "Mixed vegetables cooked with basmati rice in a medley of aromatic spices."
+        },
+        {
+          "name": "Paneer 65 Biriyani",
+          "price": 21,
+          "description": "Cubes of paneer (Indian cottage cheese) cooked with basmati rice and rich spices."
+        },
+        {
+          "name": "Egg Biriyani",
+          "price": 18,
+          "description": "Boiled eggs mixed with spiced basmati rice for a hearty, flavorful meal."
+        },
+        {
+          "name": "Chicken Biriyani",
+          "price": 21,
+          "description": "A flavorful dish of spiced basmati rice cooked with tender chicken, herbs, and rich spices.",
+          "spicy": true
+        },
+        {
+          "name": "Chicken 65 Biriyani",
+          "price": 25,
+          "description": "Spicy, crispy fried chicken mixed with aromatic basmati rice and flavorful spices."
+        },
+        {
+          "name": "Chicken Tikka Biriyani",
+          "price": 25,
+          "description": "Marinated and grilled chicken pieces in basmati rice cooked in aromatic spices."
+        },
+        {
+          "name": "Tandoori Chicken Biriyani",
+          "price": 23,
+          "description": "Grilled tandoori-style chicken paired with spiced basmati rice."
+        },
+        {
+          "name": "Mutton Biriyani",
+          "price": 25,
+          "description": "Tender pieces of spiced lamb or goat meat served with fragrant basmati rice."
+        },
+        {
+          "name": "Shrimp Biriyani",
+          "price": 25,
+          "description": "Juicy shrimp cooked with fragrant rice, seasoned with aromatic spices."
+        },
+        {
+          "name": "Fish Biriyani",
+          "price": 25,
+          "description": "Fresh fish cooked with aromatic basmati rice and a blend of spices."
+        }
+      ]
+    },
+    {
+      "name": "Rice",
+      "items": [
+        {
+          "name": "Basmati Rice",
+          "price": 5,
+          "description": "Fragrant, long-grain rice cooked to perfection."
+        },
+        {
+          "name": "Jeera Rice",
+          "price": 8,
+          "description": "Basmati rice flavored with cumin seeds and mild spices."
+        },
+        {
+          "name": "Coconut Rice",
+          "price": 12,
+          "description": "Basmati rice cooked with grated coconut and mild spices."
+        },
+        {
+          "name": "Biriyani Rice",
+          "price": 12,
+          "description": "Aromatic, spiced rice cooked with fragrant herbs paired with curry or vegetables."
+        },
+        {
+          "name": "Lemon Rice",
+          "price": 12,
+          "description": "Soft rice mixed with Lemon, seasoned with mustard and curry leaves."
+        },
+        {
+          "name": "Curd Rice",
+          "price": 10,
+          "description": "Soft rice mixed with yogurt, seasoned with mustard and curry leaves."
+        }
+      ]
+    },
+    {
+      "name": "Indo Chinese",
+      "items": [
+        {
+          "name": "Veg Fried Rice",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Egg Fried Rice",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Chicken Fried Rice",
+          "price": 19,
+          "description": ""
+        },
+        {
+          "name": "Shrimp Fried Rice",
+          "price": 21,
+          "description": ""
+        },
+        {
+          "name": "Veg Noodles",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Egg Noodles",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Chicken Noodles",
+          "price": 19,
+          "description": ""
+        },
+        {
+          "name": "Shrimp Noodles",
+          "price": 21,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Manchurian",
+      "items": [
+        {
+          "name": "Gobi Manchurian",
+          "price": 16,
+          "description": ""
+        },
+        {
+          "name": "Chilly Idly",
+          "price": 15,
+          "description": ""
+        },
+        {
+          "name": "Chilly Paneer",
+          "price": 17,
+          "description": ""
+        },
+        {
+          "name": "Chilly Parotta",
+          "price": 15,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "Curries - Veg",
+      "items": [
+        {
+          "name": "Dhal Tadka",
+          "price": 18,
+          "description": "Lentils cooked with spices, topped with a tempering of garlic, mustard, and ghee."
+        },
+        {
+          "name": "Channa Masala",
+          "price": 18,
+          "description": "Chickpeas cooked in a rich, tangy tomato gravy, infused with a blend of warm Indian spices."
+        },
+        {
+          "name": "Paneer Tikka Masala",
+          "price": 18,
+          "description": "Succulent pieces of marinated paneer (Indian cottage cheese) grilled to perfection and simmered in a rich, creamy tomato-based curry."
+        },
+        {
+          "name": "Palak Paneer",
+          "price": 18,
+          "description": "Spiced curry with tender paneer cubes, peppers, and aromatic spices, served in a rich, flavorful Spinach paneer gravy."
+        },
+        {
+          "name": "Kadai Paneer",
+          "price": 18,
+          "description": "Spiced curry with tender paneer cubes, peppers, and aromatic spices, served in a rich, flavorful gravy."
+        },
+        {
+          "name": "Shahi Paneer",
+          "price": 18,
+          "description": "A creamy tomato-based gravy. Infused with aromatic spices, cashew paste, and a hint of saffron."
+        },
+        {
+          "name": "Paneer Burji",
+          "price": 18,
+          "description": "A flavorful and hearty dish made with crumbled paneer simmered in a spiced onion-tomato gravy."
+        },
+        {
+          "name": "Paneer Butter Masala",
+          "price": 18,
+          "description": "Buttery tomato-based gravy flavored with aromatic spices, a hint of sweetness, and a touch of cream.",
+          "spicy": true
+        },
+        {
+          "name": "Matar Paneer Masala",
+          "price": 18,
+          "description": "Peas and Paneer cooked in a mildly spiced, aromatic curry."
+        },
+        {
+          "name": "Egg Plant Bartha",
+          "price": 18,
+          "description": "Smoky, roasted eggplant mashed and cooked with onions, tomatoes with earthy taste."
+        },
+        {
+          "name": "Mushroom Matar Masala",
+          "price": 18,
+          "description": "Mushrooms and green peas cooked in a rich, spiced tomato gravy."
+        },
+        {
+          "name": "Malai Kofta",
+          "price": 18,
+          "description": "Fried balls of potato and paneer in a rich and creamy mild gravy."
+        },
+        {
+          "name": "Chettinadu Veg Curry",
+          "price": 18,
+          "description": "A South Indian-style vegetable curry with a blend of aromatic spices and a fiery kick.",
+          "spicy": true
+        },
+        {
+          "name": "Bhindi Mango Curry",
+          "price": 18,
+          "description": "Stir-fried dish made with tender okra sautéed with onions, tomatoes and mango."
+        },
+        {
+          "name": "Bhindi Masala",
+          "price": 18,
+          "description": "Stir-fried dish made with tender okra sautéed with onions, tomatoes."
+        },
+        {
+          "name": "Aloo Gobi Masala",
+          "price": 18,
+          "description": "Tender potatoes and cauliflower cooked in a mildly spiced, aromatic curry."
+        },
+        {
+          "name": "Aloo Mutter",
+          "price": 18,
+          "description": "A dish featuring tender potatoes and green peas cooked in a mildly spiced tomato and onion gravy."
+        }
+      ]
+    },
+    {
+      "name": "Chicken Curries",
+      "items": [
+        {
+          "name": "Egg Curry",
+          "price": 20,
+          "description": "Hard-boiled eggs simmered mixed with spices, onions, tomatoes, and a hint of cream."
+        },
+        {
+          "name": "Chettinadu Chicken",
+          "price": 20,
+          "description": "A South Indian-style chicken curry with a blend of aromatic spices and a fiery kick."
+        },
+        {
+          "name": "Butter Chicken",
+          "price": 20,
+          "description": "Tender chicken cooked in a rich, creamy tomato sauce with mild spices.",
+          "spicy": true
+        },
+        {
+          "name": "Kadai Chicken",
+          "price": 20,
+          "description": "Chicken cooked in a spicy, tangy gravy with bell peppers, onions, and traditional Indian spices."
+        },
+        {
+          "name": "Chicken Korma",
+          "price": 20,
+          "description": "A mild, creamy chicken curry made with yogurt, cashews, and spices."
+        },
+        {
+          "name": "Chicken Saag",
+          "price": 20,
+          "description": "Chicken cooked in a flavorful spinach (saag) gravy with Indian spices."
+        },
+        {
+          "name": "Chicken Vindaloo",
+          "price": 20,
+          "description": "A spicy, tangy curry made with chicken and a blend of vinegar and spices."
+        },
+        {
+          "name": "Pepper Chicken",
+          "price": 20,
+          "description": "Chicken cooked with a peppery, savory sauce with a hint of spice.",
+          "spicy": true
+        },
+        {
+          "name": "Gongura Chicken Curry",
+          "price": 20,
+          "description": "Chicken cooked with tangy gongura leaves and spices, typical of Andhra cuisine."
+        },
+        {
+          "name": "Aloo Chicken",
+          "price": 20,
+          "description": "A mild, creamy chicken curry made with yogurt, Aloo, and spices."
+        },
+        {
+          "name": "Chicken Dilbhar",
+          "price": 20,
+          "description": "Tender chicken cooked with herbs, Tomatoes and Yogurt giving you a mildly tangy and savory taste."
+        }
+      ]
+    },
+    {
+      "name": "Lamb Curries",
+      "items": [
+        {
+          "name": "Madras Lamb Curry",
+          "price": 20,
+          "description": "Tender lamb pieces slow-cooked in a rich, spicy coconut-based curry with spices, tamrind and curry leaves."
+        },
+        {
+          "name": "Lamb Kadai Masala",
+          "price": 23,
+          "description": "Lamb cooked in a spicy, tangy gravy with bell peppers, onions, and traditional Indian spices."
+        },
+        {
+          "name": "Lamb Saag",
+          "price": 23,
+          "description": "Lamb cooked in a flavorful spinach (saag) gravy with Indian spices."
+        },
+        {
+          "name": "Lamb Vindaloo",
+          "price": 23,
+          "description": "A spicy, tangy curry made with lamb and a blend of vinegar and spices."
+        },
+        {
+          "name": "Lamb Korma",
+          "price": 23,
+          "description": "A mild, creamy lamb curry made with yogurt, cashews, and spices."
+        },
+        {
+          "name": "Lamb Roganjosh",
+          "price": 23,
+          "description": "A classic Kashmiri delicacy, featuring tender lamb pieces slow-cooked in a rich gravy."
+        },
+        {
+          "name": "Pepper Lamb",
+          "price": 27,
+          "description": "Lamb cooked with a peppery, savory sauce with a hint of spice."
+        },
+        {
+          "name": "Aloo Lamb Curry",
+          "price": 23,
+          "description": "A mild, creamy lamb curry made with yogurt, Aloo, and spices."
+        },
+        {
+          "name": "Lamb Dilbhar",
+          "price": 23,
+          "description": "Tender Lamb cooked with herbs, Tomatoes and Yogurt giving you a mildly tangy and savory taste."
+        }
+      ]
+    },
+    {
+      "name": "Sea Food Curries",
+      "items": [
+        {
+          "name": "Fish Curry",
+          "price": 25,
+          "description": "Fresh fish cooked in a tangy, spiced gravy with hints of tamarind and curry leaves."
+        },
+        {
+          "name": "Fish Kadai",
+          "price": 25,
+          "description": "Fish cooked with onions, bell peppers, and a tangy, spicy gravy."
+        },
+        {
+          "name": "Fish Korma",
+          "price": 25,
+          "description": "Fish cooked in a mild, creamy curry with yogurt, cashews, and aromatic spices."
+        },
+        {
+          "name": "Shrimp Curry",
+          "price": 25,
+          "description": "Succulent shrimp cooked in a flavorful, spiced coconut-based gravy."
+        },
+        {
+          "name": "Shrimp Kadai",
+          "price": 25,
+          "description": "Shrimp cooked with onions, bell peppers, and a tangy, spicy gravy."
+        },
+        {
+          "name": "Shrimp Korma",
+          "price": 25,
+          "description": "Shrimp cooked in a mild, creamy curry with yogurt, cashews, and aromatic spices."
+        },
+        {
+          "name": "Shrimp Sag",
+          "price": 25,
+          "description": "Shrimp cooked in a flavorful spinach (saag) gravy with Indian spices."
+        },
+        {
+          "name": "Shrimp Tikka Masala",
+          "price": 25,
+          "description": "Grilled shrimp pieces in a flavorful, spiced tomato-based gravy."
+        },
+        {
+          "name": "Crab Masala",
+          "price": 25,
+          "description": "Fresh crab cooked in a fragrant, spiced curry sauce with a mix of herbs and spices."
+        }
+      ]
+    },
+    {
+      "name": "Drinks & Desserts",
+      "items": [
+        {
+          "name": "Madras Coffee",
+          "price": 4,
+          "description": ""
+        },
+        {
+          "name": "Masala Chai",
+          "price": 4,
+          "description": ""
+        },
+        {
+          "name": "Sweet Lassi",
+          "price": 6,
+          "description": ""
+        },
+        {
+          "name": "Salt Lassi",
+          "price": 6,
+          "description": ""
+        },
+        {
+          "name": "Mango Lassi",
+          "price": 6,
+          "description": ""
+        },
+        {
+          "name": "Soft Drinks",
+          "price": 2.50,
+          "description": "Pepsi, Coke, Canada Dry"
+        },
+        {
+          "name": "Ginger Beer",
+          "price": 3,
+          "description": ""
+        },
+        {
+          "name": "Payasam",
+          "price": 2,
+          "description": ""
+        },
+        {
+          "name": "Mango Kesari",
+          "price": 6,
+          "description": ""
+        },
+        {
+          "name": "Gulab Jamun",
+          "price": 6,
+          "description": ""
+        },
+        {
+          "name": "Rasamalai",
+          "price": 6,
+          "description": ""
+        },
+        {
+          "name": "Carrot Halwa",
+          "price": 6,
+          "description": ""
+        },
+        {
+          "name": "Ashoka Halwa",
+          "price": 6,
+          "description": ""
+        },
+        {
+          "name": "Ice Cream",
+          "price": 6,
+          "description": ""
+        }
+      ]
+    }
+  ]
+}

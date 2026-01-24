@@ -1,0 +1,19 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Database
+*.db
+backend/data/dosa_point.db
+
+# Node
+node_modules/
+dist/
+npm-debug.log*
+
+# system
+.DS_Store

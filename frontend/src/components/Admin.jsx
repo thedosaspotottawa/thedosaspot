@@ -234,6 +234,9 @@ function Admin() {
 
     return (
         <section className="py-8 min-h-[80vh]">
+            {/* Semi-transparent white overlay for better text visibility */}
+            <div className="fixed inset-0 bg-white/80 z-[-1]" />
+            
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center mb-6">
                     <div>

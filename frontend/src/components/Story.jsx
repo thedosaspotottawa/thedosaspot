@@ -5,6 +5,9 @@ import { Heart, Landmark, MapPin, Award } from 'lucide-react';
 const Story = ({ onMenuClick }) => {
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 rounded-xl my-4 min-h-[60vh]">
+            {/* Semi-transparent white overlay for better text visibility */}
+            <div className="fixed inset-0 bg-white/80 z-[-1]" />
+            
             <div className="flex flex-col lg:flex-row items-center gap-8 mb-6">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}

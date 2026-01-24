@@ -74,7 +74,10 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
+              className="relative -mt-20 pt-20"
             >
+              {/* Semi-transparent white overlay for better text visibility */}
+              <div className="absolute inset-0 bg-white/80 z-[1] pointer-events-none" />
               <Hero onMenuClick={() => setActiveTab('menu')} onStoryClick={() => setActiveTab('story')} />
             </motion.div>
           )}

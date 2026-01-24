@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, Users, Clock, Send, CheckCircle2 } from 'lucide-react';
-import axios from 'axios';
+import LoadingIcon from './LoadingIcon';
+
+// inside button rendering
+{ status === 'loading' ? <LoadingIcon /> : 'Confirm Reservation' }
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 

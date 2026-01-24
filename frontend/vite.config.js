@@ -44,7 +44,8 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,pdf}'],
+        maximumFileSizeToCacheInBytes: 50 * 1024 * 1024, // 50MB to handle large PDFs
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: true

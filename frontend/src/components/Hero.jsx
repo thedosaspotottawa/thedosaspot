@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 
 function Hero({ onMenuClick, onStoryClick }) {
     return (
-        <section className="relative h-[75vh] flex items-center overflow-hidden">
+        <section className="relative h-[60vh] md:h-[75vh] flex items-center overflow-hidden">
             {/* Background Decor */}
             <div className="absolute inset-0 z-0 opacity-30">
                 <div className="absolute top-10 right-[-10%] w-[400px] h-[400px] bg-sunflower/10 rounded-full blur-3xl" />

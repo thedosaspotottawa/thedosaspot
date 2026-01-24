@@ -1,18 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Flame, FileText } from 'lucide-react';
+import LoadingIcon from './LoadingIcon';
 
 function Menu({ categories, isLoading }) {
     if (isLoading) {
         return (
             <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-                <div className="animate-pulse flex flex-col items-center">
-                    <div className="h-10 w-48 bg-gray-200 rounded mb-8" />
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                        {[1, 2, 3, 4, 5, 6].map(i => (
-                            <div key={i} className="h-40 bg-gray-200 rounded-xl" />
-                        ))}
-                    </div>
+                <div className="flex flex-col items-center justify-center min-h-[50vh]">
+                    <LoadingIcon />
+                    <p className="mt-4 text-slate-grey font-medium">Loading menu...</p>
                 </div>
             </div>
         );

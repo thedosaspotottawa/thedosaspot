@@ -36,8 +36,8 @@ function IOSInstallPrompt() {
                 </button>
 
                 <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-sunflower rounded-2xl flex items-center justify-center mb-4 shadow-lg">
-                        <span className="text-2xl font-bold text-coffee-bean">DP</span>
+                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                        <img src="/android-chrome-512x512.png" alt="The Dosa Spot" className="w-full h-full rounded-2xl object-cover" />
                     </div>
 
                     <h3 className="text-lg font-bold text-coffee-bean mb-2">Install Dosa Spot</h3>

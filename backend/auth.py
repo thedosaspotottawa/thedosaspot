@@ -1,6 +1,7 @@
+import os
 from fastapi import HTTPException
 
-ADMIN_PASSWORD = "dosa123"
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "dosa123")
 
 def verify_admin(password: str):
     if password != ADMIN_PASSWORD:

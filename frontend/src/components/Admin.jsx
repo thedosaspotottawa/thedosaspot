@@ -9,6 +9,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 function Admin() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
+    const [token, setToken] = useState(localStorage.getItem('adminToken') || '');
     const [reservations, setReservations] = useState([]);
     const [menu, setMenu] = useState({ categories: [] });
     const [banners, setBanners] = useState([]);
@@ -27,6 +28,15 @@ function Admin() {
     const [catForm, setCatForm] = useState({ name: '' });
     const [bannerForm, setBannerForm] = useState({ message: '', active: true });
 
+    // Check for existing token on mount
+    useEffect(() => {
+        const storedToken = localStorage.getItem('adminToken');
+        if (storedToken) {
+            setToken(storedToken);
+            setIsAuthenticated(true);
+        }
+    }, []);
+
     useEffect(() => {
         if (isAuthenticated) {
             fetchReservations();
@@ -34,6 +44,11 @@ function Admin() {
             fetchBanners();
         }
     }, [isAuthenticated]);
+
+    // Create axios instance with auth header
+    const getAuthHeaders = () => ({
+        headers: { Authorization: `Bearer ${token}` }
+    });
 
     const fetchReservations = async () => {
         try {
@@ -46,10 +61,36 @@ function Admin() {
 
     const handleReservationStatus = async (id, status) => {
         try {
-            await axios.put(`${API_URL}/reservations/${id}`, { status, password });
+            await axios.put(`${API_URL}/reservations/${id}`, { status }, getAuthHeaders());
             fetchReservations();
         } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
             alert(err.response?.data?.detail || 'Error updating reservation status');
+        }
+    };
+
+    const handleDeleteReservation = async (id, bookingInfo) => {
+        const bookingTypeLabels = {
+            table: 'table booking',
+            private_event: 'private event',
+            catering: 'catering request'
+        };
+        const typeLabel = bookingTypeLabels[bookingInfo.booking_type] || 'reservation';
+        
+        if (!confirm(`Are you sure you want to delete this ${typeLabel} for ${bookingInfo.name}?\n\nThis action cannot be undone.`)) {
+            return;
+        }
+        
+        try {
+            await axios.delete(`${API_URL}/reservations/${id}`, getAuthHeaders());
+            fetchReservations();
+        } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
+            alert(err.response?.data?.detail || 'Error deleting reservation');
         }
     };
 
@@ -78,14 +119,24 @@ function Admin() {
         e.preventDefault();
         try {
             const response = await axios.post(`${API_URL}/auth/login`, { password });
-            if (response.data.success) {
+            if (response.data.success && response.data.token) {
+                const newToken = response.data.token;
+                setToken(newToken);
+                localStorage.setItem('adminToken', newToken);
                 setIsAuthenticated(true);
+                setPassword(''); // Clear password from state
             } else {
                 alert('Invalid credentials');
             }
         } catch (err) {
             alert('Invalid credentials');
         }
+    };
+
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        setToken('');
+        localStorage.removeItem('adminToken');
     };
 
     const handleSaveItem = async (e) => {
@@ -98,19 +149,21 @@ function Admin() {
             const payload = {
                 ...itemForm,
                 price: parseFloat(itemForm.price),
-                category_id: parseInt(itemForm.category_id),
-                password
+                category_id: parseInt(itemForm.category_id)
             };
             if (editingItem) {
-                await axios.put(`${API_URL}/menu/items/${editingItem.id}`, payload);
+                await axios.put(`${API_URL}/menu/items/${editingItem.id}`, payload, getAuthHeaders());
             } else {
-                await axios.post(`${API_URL}/menu/items`, payload);
+                await axios.post(`${API_URL}/menu/items`, payload, getAuthHeaders());
             }
             setIsItemModalOpen(false);
             setEditingItem(null);
             setItemForm({ name: '', price: '', description: '', spicy: false, image_url: '', category_id: menu.categories[0]?.id || '' });
             fetchMenu();
         } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
             alert(err.response?.data?.detail || 'Error saving item');
         }
     };
@@ -118,9 +171,12 @@ function Admin() {
     const handleDeleteItem = async (id) => {
         if (!confirm('Are you sure you want to delete this item?')) return;
         try {
-            await axios.delete(`${API_URL}/menu/items/${id}?password=${password}`);
+            await axios.delete(`${API_URL}/menu/items/${id}`, getAuthHeaders());
             fetchMenu();
         } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
             alert('Error deleting item');
         }
     };
@@ -128,17 +184,20 @@ function Admin() {
     const handleSaveCategory = async (e) => {
         e.preventDefault();
         try {
-            const payload = { ...catForm, password };
+            const payload = { ...catForm };
             if (editingCategory) {
-                await axios.put(`${API_URL}/menu/categories/${editingCategory.id}`, payload);
+                await axios.put(`${API_URL}/menu/categories/${editingCategory.id}`, payload, getAuthHeaders());
             } else {
-                await axios.post(`${API_URL}/menu/categories`, payload);
+                await axios.post(`${API_URL}/menu/categories`, payload, getAuthHeaders());
             }
             setIsCategoryModalOpen(false);
             setEditingCategory(null);
             setCatForm({ name: '' });
             fetchMenu();
         } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
             alert(err.response?.data?.detail || 'Error saving category');
         }
     };
@@ -146,9 +205,12 @@ function Admin() {
     const handleDeleteCategory = async (id) => {
         if (!confirm('Are you sure? This will delete all items in this category.')) return;
         try {
-            await axios.delete(`${API_URL}/menu/categories/${id}?password=${password}`);
+            await axios.delete(`${API_URL}/menu/categories/${id}`, getAuthHeaders());
             fetchMenu();
         } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
             alert('Error deleting category');
         }
     };
@@ -156,17 +218,20 @@ function Admin() {
     const handleSaveBanner = async (e) => {
         e.preventDefault();
         try {
-            const payload = { ...bannerForm, password };
+            const payload = { ...bannerForm };
             if (editingBanner) {
-                await axios.put(`${API_URL}/banners/${editingBanner.id}`, payload);
+                await axios.put(`${API_URL}/banners/${editingBanner.id}`, payload, getAuthHeaders());
             } else {
-                await axios.post(`${API_URL}/banners`, payload);
+                await axios.post(`${API_URL}/banners`, payload, getAuthHeaders());
             }
             setIsBannerModalOpen(false);
             setEditingBanner(null);
             setBannerForm({ message: '', active: true });
             fetchBanners();
         } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
             alert(err.response?.data?.detail || 'Error saving banner');
         }
     };
@@ -174,9 +239,12 @@ function Admin() {
     const handleDeleteBanner = async (id) => {
         if (!confirm('Are you sure you want to delete this banner message?')) return;
         try {
-            await axios.delete(`${API_URL}/banners/${id}?password=${password}`);
+            await axios.delete(`${API_URL}/banners/${id}`, getAuthHeaders());
             fetchBanners();
         } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
             alert('Error deleting banner');
         }
     };
@@ -245,7 +313,7 @@ function Admin() {
                         <p className="text-slate-grey text-sm">Welcome back, Admin.</p>
                     </div>
                     <button
-                        onClick={() => setIsAuthenticated(false)}
+                        onClick={handleLogout}
                         className="flex items-center gap-2 text-red-500 font-bold hover:text-red-700 transition-colors text-sm"
                     >
                         <LogOut size={18} />
@@ -291,7 +359,7 @@ function Admin() {
                                         <th className="px-4 py-3 font-bold">Date & Time</th>
                                         <th className="px-4 py-3 font-bold">Guests</th>
                                         <th className="px-4 py-3 font-bold">Details</th>
-                                        <th className="px-4 py-3 font-bold text-right pr-6">Status</th>
+                                        <th className="px-4 py-3 font-bold text-right pr-6">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-silver/10 text-sm">
@@ -357,31 +425,40 @@ function Admin() {
                                                     )}
                                                 </td>
                                                 <td className="px-4 py-3 text-right pr-6">
-                                                    {res.status === 'pending' ? (
-                                                        <div className="flex gap-2 justify-end">
-                                                            <button
-                                                                onClick={() => handleReservationStatus(res.id, 'confirmed')}
-                                                                className="p-1.5 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition-colors"
-                                                                title="Approve"
-                                                            >
-                                                                <Check size={16} />
-                                                            </button>
-                                                            <button
-                                                                onClick={() => handleReservationStatus(res.id, 'rejected')}
-                                                                className="p-1.5 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
-                                                                title="Reject"
-                                                            >
-                                                                <XCircle size={16} />
-                                                            </button>
-                                                        </div>
-                                                    ) : (
-                                                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${res.status === 'confirmed' ? 'bg-green-100 text-green-700' :
-                                                            res.status === 'rejected' ? 'bg-red-100 text-red-700' :
-                                                                'bg-gray-100 text-gray-700'
-                                                            }`}>
-                                                            {res.status}
-                                                        </span>
-                                                    )}
+                                                    <div className="flex gap-2 justify-end items-center">
+                                                        {res.status === 'pending' ? (
+                                                            <>
+                                                                <button
+                                                                    onClick={() => handleReservationStatus(res.id, 'confirmed')}
+                                                                    className="p-1.5 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition-colors"
+                                                                    title="Approve"
+                                                                >
+                                                                    <Check size={16} />
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => handleReservationStatus(res.id, 'rejected')}
+                                                                    className="p-1.5 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                                                                    title="Reject"
+                                                                >
+                                                                    <XCircle size={16} />
+                                                                </button>
+                                                            </>
+                                                        ) : (
+                                                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${res.status === 'confirmed' ? 'bg-green-100 text-green-700' :
+                                                                res.status === 'rejected' ? 'bg-red-100 text-red-700' :
+                                                                    'bg-gray-100 text-gray-700'
+                                                                }`}>
+                                                                {res.status}
+                                                            </span>
+                                                        )}
+                                                        <button
+                                                            onClick={() => handleDeleteReservation(res.id, res)}
+                                                            className="p-1.5 bg-gray-100 text-gray-600 rounded-lg hover:bg-red-100 hover:text-red-600 transition-colors"
+                                                            title="Delete"
+                                                        >
+                                                            <Trash2 size={16} />
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </motion.tr>
                                         );
@@ -400,7 +477,10 @@ function Admin() {
                 )}
 
                 {activeTab === 'calendar' && (
-                    <CalendarView reservations={reservations} />
+                    <CalendarView 
+                        reservations={reservations} 
+                        onDelete={handleDeleteReservation}
+                    />
                 )}
 
                 {activeTab === 'menu' && (

@@ -1,10 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Body
 from sqlalchemy.orm import Session
 from typing import List
 from database import get_db
 from models import ReservationDB
 from schemas import Reservation, ReservationStatusUpdate
-from auth import verify_admin
+from auth import verify_admin_token
 
 router = APIRouter(prefix="/reservations", tags=["reservations"])
 
@@ -31,11 +31,10 @@ async def get_reservations(db: Session = Depends(get_db)):
 @router.put("/{reservation_id}", response_model=Reservation)
 async def update_reservation_status(
     reservation_id: int, 
-    update_data: ReservationStatusUpdate, 
-    db: Session = Depends(get_db)
+    update_data: ReservationStatusUpdate,
+    db: Session = Depends(get_db),
+    _: bool = Depends(verify_admin_token)
 ):
-    verify_admin(update_data.password)
-    
     db_res = db.query(ReservationDB).filter(ReservationDB.id == reservation_id).first()
     if not db_res:
         raise HTTPException(status_code=404, detail="Reservation not found")
@@ -44,3 +43,17 @@ async def update_reservation_status(
     db.commit()
     db.refresh(db_res)
     return db_res
+
+@router.delete("/{reservation_id}")
+async def delete_reservation(
+    reservation_id: int,
+    db: Session = Depends(get_db),
+    _: bool = Depends(verify_admin_token)
+):
+    db_res = db.query(ReservationDB).filter(ReservationDB.id == reservation_id).first()
+    if not db_res:
+        raise HTTPException(status_code=404, detail="Reservation not found")
+    
+    db.delete(db_res)
+    db.commit()
+    return {"message": "Reservation deleted successfully", "id": reservation_id}

@@ -7,7 +7,7 @@ from sqlalchemy import text, inspect
 from database import engine, Base, SessionLocal, DATA_DIR
 from models import CategoryDB, MenuItemDB, BannerDB
 from routers import menu, reservations, banners
-from auth import verify_admin, AdminLoginRequest, AdminLoginResponse
+from auth import verify_password, create_access_token, AdminLoginRequest, AdminLoginResponse
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -43,11 +43,16 @@ def health_check():
 
 @app.post("/auth/login", response_model=AdminLoginResponse)
 async def admin_login(request: AdminLoginRequest):
-    try:
-        verify_admin(request.password)
-        return {"success": True, "message": "Authentication successful"}
-    except Exception:
-        return {"success": False, "message": "Invalid password"}
+    if verify_password(request.password):
+        # Create JWT token
+        access_token = create_access_token(data={"admin": True})
+        return {
+            "success": True, 
+            "message": "Authentication successful",
+            "token": access_token
+        }
+    else:
+        return {"success": False, "message": "Invalid password", "token": None}
 
 # --- Seeding ---
 def seed_banners(db: Session):

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, ChevronLeft, ChevronRight, Users, PartyPopper, UtensilsCrossed, Clock, MapPin, DollarSign, X } from 'lucide-react';
+import { Calendar, ChevronLeft, ChevronRight, Users, PartyPopper, UtensilsCrossed, Clock, MapPin, DollarSign, X, Trash2 } from 'lucide-react';
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
-function CalendarView({ reservations }) {
+function CalendarView({ reservations, onDelete }) {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedBooking, setSelectedBooking] = useState(null);
     const [calendarDays, setCalendarDays] = useState([]);
@@ -292,12 +292,26 @@ function CalendarView({ reservations }) {
                                 )}
                             </div>
 
-                            <button
-                                onClick={() => setSelectedBooking(null)}
-                                className="w-full mt-6 bg-coffee-bean text-white font-bold py-3 rounded-xl hover:bg-graphite transition-all"
-                            >
-                                Close
-                            </button>
+                            <div className="flex gap-3 mt-6">
+                                <button
+                                    onClick={() => {
+                                        if (onDelete) {
+                                            onDelete(selectedBooking.id, selectedBooking);
+                                            setSelectedBooking(null);
+                                        }
+                                    }}
+                                    className="flex-1 bg-red-500 text-white font-bold py-3 rounded-xl hover:bg-red-600 transition-all flex items-center justify-center gap-2"
+                                >
+                                    <Trash2 size={18} />
+                                    Delete Booking
+                                </button>
+                                <button
+                                    onClick={() => setSelectedBooking(null)}
+                                    className="flex-1 bg-coffee-bean text-white font-bold py-3 rounded-xl hover:bg-graphite transition-all"
+                                >
+                                    Close
+                                </button>
+                            </div>
                         </motion.div>
                     </div>
                 )}

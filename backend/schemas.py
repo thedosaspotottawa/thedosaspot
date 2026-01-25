@@ -27,10 +27,9 @@ class MenuData(BaseModel):
 
 class MenuItemCreate(MenuItemBase):
     category_id: int
-    password: str
 
 class CategoryCreate(MenuCategoryBase):
-    password: str
+    pass
 
 class Reservation(BaseModel):
     id: Optional[int] = None
@@ -52,7 +51,6 @@ class Reservation(BaseModel):
 
 class ReservationStatusUpdate(BaseModel):
     status: str
-    password: str
 
 class BannerBase(BaseModel):
     message: str
@@ -64,4 +62,4 @@ class Banner(BannerBase):
         from_attributes = True
 
 class BannerCreate(BannerBase):
-    password: str
+    pass

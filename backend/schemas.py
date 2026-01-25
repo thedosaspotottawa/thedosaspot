@@ -41,6 +41,12 @@ class Reservation(BaseModel):
     time: str
     guests: int
     status: Optional[str] = "pending"
+    booking_type: Optional[str] = "table"  # table, private_event, catering
+    event_type: Optional[str] = None
+    duration: Optional[str] = None
+    special_requests: Optional[str] = None
+    budget: Optional[str] = None
+    venue: Optional[str] = None
     class Config:
         from_attributes = True
 

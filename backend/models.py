@@ -23,6 +23,7 @@ class MenuItemDB(Base):
 class ReservationDB(Base):
     __tablename__ = "reservations"
     id = Column(Integer, primary_key=True, index=True)
+    # Existing fields
     name = Column(String)
     email = Column(String)
     phone = Column(String)
@@ -31,6 +32,13 @@ class ReservationDB(Base):
     guests = Column(Integer)
     status = Column(String, default="pending")
     created_at = Column(DateTime, default=datetime.utcnow)
+    # New fields for booking types
+    booking_type = Column(String, default="table")  # table, private_event, catering
+    event_type = Column(String, nullable=True)  # birthday, wedding, corporate, etc.
+    duration = Column(String, nullable=True)  # for private events
+    special_requests = Column(Text, nullable=True)
+    budget = Column(String, nullable=True)  # for catering/private events
+    venue = Column(String, nullable=True)  # for catering (client location or restaurant)
 
 class BannerDB(Base):
     __tablename__ = "banners"

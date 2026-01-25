@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Plus, Package, Edit, Trash2, CalendarCheck, LogOut, Megaphone, Check, XCircle } from 'lucide-react';
+import { Shield, Plus, Package, Edit, Trash2, CalendarCheck, LogOut, Megaphone, Check, XCircle, CalendarDays } from 'lucide-react';
 import axios from 'axios';
+import CalendarView from './CalendarView';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
@@ -260,6 +261,12 @@ function Admin() {
                         Reservations
                     </button>
                     <button
+                        onClick={() => setActiveTab('calendar')}
+                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'calendar' ? 'bg-coffee-bean text-white shadow-md' : 'bg-white text-slate-grey border border-silver/30'}`}
+                    >
+                        Calendar View
+                    </button>
+                    <button
                         onClick={() => setActiveTab('menu')}
                         className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'menu' ? 'bg-coffee-bean text-white shadow-md' : 'bg-white text-slate-grey border border-silver/30'}`}
                     >
@@ -279,62 +286,109 @@ function Admin() {
                             <table className="w-full text-left">
                                 <thead className="bg-gray-50 border-b border-silver/20 text-xs text-coffee-bean uppercase tracking-wider">
                                     <tr>
+                                        <th className="px-4 py-3 font-bold">Type</th>
                                         <th className="px-4 py-3 font-bold">Customer</th>
                                         <th className="px-4 py-3 font-bold">Date & Time</th>
                                         <th className="px-4 py-3 font-bold">Guests</th>
+                                        <th className="px-4 py-3 font-bold">Details</th>
                                         <th className="px-4 py-3 font-bold text-right pr-6">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-silver/10 text-sm">
-                                    {reservations.map((res, i) => (
-                                        <motion.tr
-                                            key={i}
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            transition={{ delay: i * 0.05 }}
-                                        >
-                                            <td className="px-4 py-3">
-                                                <p className="font-bold text-coffee-bean">{res.name}</p>
-                                                <p className="text-xs text-slate-grey">{res.email}</p>
-                                                <p className="text-xs text-slate-grey">{res.phone}</p>
-                                            </td>
-                                            <td className="px-4 py-3">
-                                                <p className="font-medium">{res.date}</p>
-                                                <p className="text-xs text-slate-grey">{res.time}</p>
-                                            </td>
-                                            <td className="px-4 py-3">{res.guests} Pax</td>
-                                            <td className="px-4 py-3 text-right pr-6">
-                                                {res.status === 'pending' ? (
-                                                    <div className="flex gap-2 justify-end">
-                                                        <button
-                                                            onClick={() => handleReservationStatus(res.id, 'confirmed')}
-                                                            className="p-1.5 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition-colors"
-                                                            title="Approve"
-                                                        >
-                                                            <Check size={16} />
-                                                        </button>
-                                                        <button
-                                                            onClick={() => handleReservationStatus(res.id, 'rejected')}
-                                                            className="p-1.5 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
-                                                            title="Reject"
-                                                        >
-                                                            <XCircle size={16} />
-                                                        </button>
-                                                    </div>
-                                                ) : (
-                                                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${res.status === 'confirmed' ? 'bg-green-100 text-green-700' :
-                                                        res.status === 'rejected' ? 'bg-red-100 text-red-700' :
-                                                            'bg-gray-100 text-gray-700'
-                                                        }`}>
-                                                        {res.status}
+                                    {reservations.map((res, i) => {
+                                        const bookingTypeLabels = {
+                                            table: 'Table',
+                                            private_event: 'Private Event',
+                                            catering: 'Catering'
+                                        };
+                                        const bookingTypeColors = {
+                                            table: 'bg-blue-100 text-blue-700',
+                                            private_event: 'bg-purple-100 text-purple-700',
+                                            catering: 'bg-orange-100 text-orange-700'
+                                        };
+                                        
+                                        return (
+                                            <motion.tr
+                                                key={i}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: i * 0.05 }}
+                                            >
+                                                <td className="px-4 py-3">
+                                                    <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase ${bookingTypeColors[res.booking_type || 'table']}`}>
+                                                        {bookingTypeLabels[res.booking_type || 'table']}
                                                     </span>
-                                                )}
-                                            </td>
-                                        </motion.tr>
-                                    ))}
+                                                </td>
+                                                <td className="px-4 py-3">
+                                                    <p className="font-bold text-coffee-bean">{res.name}</p>
+                                                    <p className="text-xs text-slate-grey">{res.email}</p>
+                                                    <p className="text-xs text-slate-grey">{res.phone}</p>
+                                                </td>
+                                                <td className="px-4 py-3">
+                                                    <p className="font-medium">{res.date}</p>
+                                                    <p className="text-xs text-slate-grey">{res.time}</p>
+                                                </td>
+                                                <td className="px-4 py-3">{res.guests} Pax</td>
+                                                <td className="px-4 py-3">
+                                                    {res.event_type && (
+                                                        <p className="text-xs text-slate-grey">
+                                                            <span className="font-medium">Type:</span> {res.event_type}
+                                                        </p>
+                                                    )}
+                                                    {res.duration && (
+                                                        <p className="text-xs text-slate-grey">
+                                                            <span className="font-medium">Duration:</span> {res.duration}
+                                                        </p>
+                                                    )}
+                                                    {res.venue && (
+                                                        <p className="text-xs text-slate-grey">
+                                                            <span className="font-medium">Venue:</span> {res.venue}
+                                                        </p>
+                                                    )}
+                                                    {res.budget && (
+                                                        <p className="text-xs text-slate-grey">
+                                                            <span className="font-medium">Budget:</span> {res.budget}
+                                                        </p>
+                                                    )}
+                                                    {res.special_requests && (
+                                                        <p className="text-xs text-slate-grey line-clamp-2">
+                                                            <span className="font-medium">Notes:</span> {res.special_requests}
+                                                        </p>
+                                                    )}
+                                                </td>
+                                                <td className="px-4 py-3 text-right pr-6">
+                                                    {res.status === 'pending' ? (
+                                                        <div className="flex gap-2 justify-end">
+                                                            <button
+                                                                onClick={() => handleReservationStatus(res.id, 'confirmed')}
+                                                                className="p-1.5 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition-colors"
+                                                                title="Approve"
+                                                            >
+                                                                <Check size={16} />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleReservationStatus(res.id, 'rejected')}
+                                                                className="p-1.5 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                                                                title="Reject"
+                                                            >
+                                                                <XCircle size={16} />
+                                                            </button>
+                                                        </div>
+                                                    ) : (
+                                                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${res.status === 'confirmed' ? 'bg-green-100 text-green-700' :
+                                                            res.status === 'rejected' ? 'bg-red-100 text-red-700' :
+                                                                'bg-gray-100 text-gray-700'
+                                                            }`}>
+                                                            {res.status}
+                                                        </span>
+                                                    )}
+                                                </td>
+                                            </motion.tr>
+                                        );
+                                    })}
                                     {reservations.length === 0 && (
                                         <tr>
-                                            <td colSpan="4" className="px-6 py-8 text-center text-slate-grey italic">
+                                            <td colSpan="6" className="px-6 py-8 text-center text-slate-grey italic">
                                                 No reservations found.
                                             </td>
                                         </tr>
@@ -343,6 +397,10 @@ function Admin() {
                             </table>
                         </div>
                     </div>
+                )}
+
+                {activeTab === 'calendar' && (
+                    <CalendarView reservations={reservations} />
                 )}
 
                 {activeTab === 'menu' && (

@@ -16,8 +16,8 @@ export default defineConfig({
       },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png'],
       manifest: {
-        name: 'Dosa Point',
-        short_name: 'DosaPoint',
+        name: 'The Dosa Spot',
+        short_name: 'The Dosa Spot',
         description: 'Authentic South Indian Cuisine',
         theme_color: '#3D2B1F',
         background_color: '#3D2B1F',

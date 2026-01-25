@@ -12,34 +12,6 @@ from auth import verify_admin, AdminLoginRequest, AdminLoginResponse
 # Create tables
 Base.metadata.create_all(bind=engine)
 
-# Migration function for reservations table
-def migrate_reservations_table():
-    """Add new columns to reservations table if they don't exist"""
-    try:
-        inspector = inspect(engine)
-        existing_columns = [col['name'] for col in inspector.get_columns('reservations')]
-        
-        with engine.connect() as conn:
-            columns_to_add = {
-                'booking_type': "ALTER TABLE reservations ADD COLUMN booking_type VARCHAR DEFAULT 'table'",
-                'event_type': "ALTER TABLE reservations ADD COLUMN event_type VARCHAR",
-                'duration': "ALTER TABLE reservations ADD COLUMN duration VARCHAR",
-                'special_requests': "ALTER TABLE reservations ADD COLUMN special_requests TEXT",
-                'budget': "ALTER TABLE reservations ADD COLUMN budget VARCHAR",
-                'venue': "ALTER TABLE reservations ADD COLUMN venue VARCHAR"
-            }
-            
-            for column_name, sql in columns_to_add.items():
-                if column_name not in existing_columns:
-                    conn.execute(text(sql))
-                    conn.commit()
-                    print(f"✓ Added column: {column_name}")
-            
-            print("✓ Database migration completed successfully")
-    except Exception as e:
-        print(f"Migration note: {e}")
-        # Don't fail if migration has issues, table might already be up to date
-
 app = FastAPI(title="Dosa Spot API")
 
 app.add_middleware(
@@ -164,7 +136,6 @@ def seed_db():
 
 @app.on_event("startup")
 async def startup_event():
-    migrate_reservations_table()  # Run migration first
     seed_db()  # Then seed data
 
 if __name__ == "__main__":

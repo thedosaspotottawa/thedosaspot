@@ -2,32 +2,81 @@
 
 
 :root {
-  --coffee-bean: #3E2723;
-  --sunflower-yellow: #FFB300;
-  --dark-slate-grey: #2F4F4F;
-  --silver: #C0C0C0;
-  --graphite: #383838;
+  --primary: #16291d;
+  --secondary: #2d1e12;
+  --accent: #d4a017;
+  /* Slightly more refined gold for white background */
+  --background-light: #ffffff;
+  /* Pure white theme */
+  --background-dark: #0f0a06;
+
+  --golden: #d4a017;
+  --leaf-green: #16291d;
+  --brown: #2d1e12;
+
+  --text-muted: #6b7280;
+  /* Better visibility on white */
+
+  color-scheme: light;
+  /* Force light scheme default */
+}
+
+.dark {
+  color-scheme: dark;
 }
 
 @theme {
-  --color-coffee-bean: var(--coffee-bean);
-  --color-sunflower: var(--sunflower-yellow);
-  --color-slate-grey: var(--dark-slate-grey);
-  --color-silver: var(--silver);
-  --color-graphite: var(--graphite);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-golden: var(--golden);
+  --color-leaf-green: var(--leaf-green);
+  --color-brown: var(--brown);
+  --color-background-light: var(--background-light);
+  --color-background-dark: var(--background-dark);
+
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Playfair Display", serif;
 }
 
 body {
-  @apply text-coffee-bean font-sans;
+  font-family: sans-serif;
+  background-color: var(--background-light);
+  color: #181411;
 }
 
 h1,
 h2 {
-  font-family: "Twinkle Star", cursive;
+  font-family: "Twinkle Star", sans-serif;
+}
+
+.serif-heading {
+  font-family: "Twinkle Star", serif;
 }
 
 .header-text-regular {
-  font-family: "Twinkle Star", cursive;
-  font-weight: 400;
-  font-style: normal;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.perspective-3000 {
+  perspective: 3000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }

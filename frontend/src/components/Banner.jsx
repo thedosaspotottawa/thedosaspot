@@ -25,8 +25,8 @@ function Banner({ messages }) {
     };
 
     return (
-        <div className="bg-slate-grey text-white relative font-medium text-xs z-50">
-            <div className="max-w-7xl mx-auto px-4 min-h-[40px] flex items-center justify-center relative py-2">
+        <div className="bg-[#2A1F16] text-white relative font-medium text-xs z-50 border-b border-accent/10">
+            <div className="max-w-7xl mx-auto px-4 min-h-[44px] flex items-center justify-center relative py-2">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentIndex}
@@ -34,10 +34,12 @@ function Banner({ messages }) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="flex items-center gap-2 text-center"
+                        className="flex items-center gap-3 text-center px-10"
                     >
-                        <Megaphone size={14} className="text-sunflower flex-shrink-0" />
-                        <span className="leading-tight">{activeMessages[currentIndex].message}</span>
+                        <div className="p-1.5 bg-accent/20 rounded-lg">
+                            <Megaphone size={14} className="text-accent flex-shrink-0" />
+                        </div>
+                        <span className="leading-tight tracking-wide font-bold">{activeMessages[currentIndex].message}</span>
                     </motion.div>
                 </AnimatePresence>
 
@@ -46,15 +48,15 @@ function Banner({ messages }) {
                     <>
                         <button
                             onClick={prevSlide}
-                            className="absolute left-2 text-silver/50 hover:text-white transition-colors p-1"
+                            className="absolute left-4 text-white/30 hover:text-accent transition-colors p-2"
                         >
-                            <ChevronLeft size={16} />
+                            <ChevronLeft size={18} />
                         </button>
                         <button
                             onClick={nextSlide}
-                            className="absolute right-2 text-silver/50 hover:text-white transition-colors p-1"
+                            className="absolute right-4 text-white/30 hover:text-accent transition-colors p-2"
                         >
-                            <ChevronRight size={16} />
+                            <ChevronRight size={18} />
                         </button>
                     </>
                 )}
@@ -62,12 +64,12 @@ function Banner({ messages }) {
 
             {/* Dots Indicator */}
             {activeMessages.length > 1 && (
-                <div className="flex justify-center gap-1 pb-1.5">
+                <div className="flex justify-center gap-1.5 pb-2">
                     {activeMessages.map((_, idx) => (
                         <button
                             key={idx}
                             onClick={() => setCurrentIndex(idx)}
-                            className={`w-1 h-1 rounded-full transition-all ${idx === currentIndex ? 'bg-sunflower w-3' : 'bg-silver/30'
+                            className={`h-1 rounded-full transition-all duration-300 ${idx === currentIndex ? 'bg-accent w-4' : 'bg-white/10 w-1'
                                 }`}
                         />
                     ))}

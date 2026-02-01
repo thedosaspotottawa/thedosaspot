@@ -26,11 +26,11 @@ function IOSInstallPrompt() {
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 100, opacity: 0 }}
-                className="fixed bottom-20 left-4 right-4 z-50 bg-white rounded-2xl shadow-2xl p-6 border border-sunflower/20"
+                className="fixed bottom-20 left-4 right-4 z-50 bg-white dark:bg-background-dark rounded-2xl shadow-2xl p-6 border border-primary/20"
             >
                 <button
                     onClick={() => setIsVisible(false)}
-                    className="absolute top-4 right-4 text-slate-grey hover:text-coffee-bean"
+                    className="absolute top-4 right-4 text-slate-grey hover:text-primary"
                 >
                     <X size={20} />
                 </button>
@@ -40,20 +40,20 @@ function IOSInstallPrompt() {
                         <img src="/android-chrome-512x512.png" alt="The Dosa Spot" className="w-full h-full rounded-2xl object-cover" />
                     </div>
 
-                    <h3 className="text-lg font-bold text-coffee-bean mb-2">Install Dosa Spot</h3>
+                    <h3 className="text-lg font-bold text-background-dark dark:text-white mb-2">Install Dosa Spot</h3>
                     <p className="text-slate-grey text-sm mb-6">
                         Add Dosa Spot to your home screen for a better experience and quick access!
                     </p>
 
                     <div className="space-y-4 w-full text-left">
-                        <div className="flex items-center gap-4 text-sm text-coffee-bean">
+                        <div className="flex items-center gap-4 text-sm text-background-dark dark:text-white">
                             <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
                                 <Share size={16} className="text-blue-500" />
                             </div>
                             <p>1. Tap the <span className="font-bold">Share</span> button in Safari</p>
                         </div>
 
-                        <div className="flex items-center gap-4 text-sm text-coffee-bean">
+                        <div className="flex items-center gap-4 text-sm text-background-dark dark:text-white">
                             <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0">
                                 <PlusSquare size={16} />
                             </div>

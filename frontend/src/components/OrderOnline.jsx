@@ -9,7 +9,7 @@ const OrderOnline = () => {
             description: 'Call us directly to place your order for pickup.',
             link: 'tel:+16132337739',
             icon: Phone,
-            color: 'bg-coffee-bean',
+            color: 'bg-primary',
             label: 'Call Now'
         },
         {
@@ -31,46 +31,50 @@ const OrderOnline = () => {
     ];
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 rounded-xl my-4">
-            <div className="text-center mb-6">
-                <h2 className="text-3xl font-bold text-coffee-bean mb-2">Order Online</h2>
-                <p className="text-slate-grey text-base max-w-2xl mx-auto">
-                    Choose your preferred way to order.
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 rounded-xl relative z-10">
+            <div className="text-center mb-10">
+                <span className="text-secondary font-bold tracking-[0.3em] text-xs uppercase mb-2 block">Quick & Easy</span>
+                <h2 className="text-4xl font-black text-primary dark:text-accent mb-3 drop-shadow-sm">Order Online</h2>
+                <div className="h-1.5 w-16 bg-accent mx-auto rounded-full shadow-sm"></div>
+                <p className="mt-6 text-primary/70 dark:text-text-muted text-lg max-w-xl mx-auto font-medium">
+                    Freshly made South Indian flavors, delivered straight to your door.
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {providers.map((provider, index) => (
                     <motion.div
                         key={provider.name}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ delay: index * 0.1 }}
-                        className="bg-white rounded-xl shadow-lg border border-silver/20 hover:shadow-xl transition-shadow"
+                        className="bg-white/40 backdrop-blur-md dark:bg-primary/20 rounded-3xl shadow-xl border border-white/20 dark:border-white/5 hover:shadow-2xl transition-all h-full flex flex-col group overflow-hidden"
                     >
-                        <div className={`h-1.5 ${provider.color}`} />
-                        <div className="p-6 flex flex-col items-center text-center">
-                            <div className="mb-6">
+                        <div className={`h-2 ${provider.color}`} />
+                        <div className="p-8 flex flex-col items-center text-center flex-1">
+                            <div className="mb-6 rounded-2xl group-hover:scale-105 transition-transform duration-500">
                                 {provider.logo ? (
                                     <div className="w-16 h-16 flex items-center justify-center">
                                         <img src={provider.logo} alt={provider.name} className="max-w-full max-h-full object-contain" />
                                     </div>
                                 ) : (
-                                    <div className={`p-4 rounded-xl ${provider.color} text-white shadow-md`}>
-                                        <provider.icon size={32} />
+                                    <div className={`text-primary dark:text-accent`}>
+                                        <provider.icon size={40} />
                                     </div>
                                 )}
                             </div>
-                            <p className="text-slate-grey text-sm mb-6 h-10">
+                            <h3 className="text-xl font-bold text-primary dark:text-white mb-2 tracking-tight">{provider.name}</h3>
+                            <p className="text-primary/70 dark:text-text-muted text-sm mb-8 leading-relaxed font-medium">
                                 {provider.description}
                             </p>
                             <a
                                 href={provider.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg font-bold text-sm text-white transition-transform hover:scale-105 ${provider.color}`}
+                                className={`flex items-center justify-center gap-3 w-full py-4 rounded-xl font-black text-sm text-white transition-all transform hover:scale-105 shadow-lg ${provider.color}`}
                             >
-                                {provider.name === 'Phone' ? <Phone size={18} /> : <ShoppingBag size={18} />}
+                                {provider.name === 'Phone' ? <Phone size={20} /> : <ShoppingBag size={20} />}
                                 {provider.label}
                             </a>
                         </div>

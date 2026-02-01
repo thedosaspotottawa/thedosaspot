@@ -1,7 +1,7 @@
 
 import React, { useMemo } from 'react';
 
-const BackgroundPattern = () => {
+const BackgroundPattern = ({ theme }) => {
     // Generate static random values once
     const leaves = useMemo(() => {
         return Array.from({ length: 20 }).map((_, i) => ({
@@ -15,8 +15,13 @@ const BackgroundPattern = () => {
         }));
     }, []);
 
+    // Explicitly use theme prop to bypass Tailwind's media-based dark mode
+    const bgColor = theme === 'dark' ? 'bg-background-dark' : 'bg-white';
+
     return (
-        <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-white">
+        <div className={`fixed inset-0 z-[-1] overflow-hidden pointer-events-none transition-colors duration-700 ${bgColor}`}>
+            {/* Very subtle noise or gradient if needed, but for now just the solid background with leaves */}
+            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] pointer-events-none" />
             {leaves.map((leaf) => (
                 <img
                     key={leaf.id}

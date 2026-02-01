@@ -96,9 +96,9 @@ function CalendarView({ reservations, onDelete }) {
     return (
         <div className="space-y-6">
             {/* Calendar Header */}
-            <div className="bg-white rounded-xl shadow-lg border border-silver/10 p-6">
+            <div className="bg-white rounded-xl shadow-lg border border-primary/10 p-6">
                 <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-2xl font-bold text-coffee-bean flex items-center gap-2">
+                    <h3 className="text-2xl font-bold text-primary flex items-center gap-2">
                         <Calendar size={28} />
                         {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
                     </h3>
@@ -122,22 +122,22 @@ function CalendarView({ reservations, onDelete }) {
                 <div className="flex gap-4 mb-6 text-xs">
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-blue-500 rounded"></div>
-                        <span className="text-slate-grey">Table Booking</span>
+                        <span className="text-primary/60">Table Booking</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-purple-500 rounded"></div>
-                        <span className="text-slate-grey">Private Event</span>
+                        <span className="text-primary/60">Private Event</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-orange-500 rounded"></div>
-                        <span className="text-slate-grey">Catering</span>
+                        <span className="text-primary/60">Catering</span>
                     </div>
                 </div>
 
                 {/* Day Names */}
                 <div className="grid grid-cols-7 gap-2 mb-2">
                     {dayNames.map(day => (
-                        <div key={day} className="text-center font-bold text-xs text-slate-grey py-2">
+                        <div key={day} className="text-center font-bold text-xs text-primary/60 py-2">
                             {day}
                         </div>
                     ))}
@@ -153,13 +153,13 @@ function CalendarView({ reservations, onDelete }) {
                             transition={{ delay: index * 0.01 }}
                             className={`min-h-[100px] p-2 rounded-lg border ${
                                 day.date 
-                                    ? 'bg-white border-silver/20 hover:border-sunflower/50 transition-colors' 
+                                    ? 'bg-white border-primary/20 hover:border-accent/50 transition-colors' 
                                     : 'bg-gray-50 border-transparent'
                             }`}
                         >
                             {day.date && (
                                 <>
-                                    <div className="font-bold text-sm text-coffee-bean mb-2">
+                                    <div className="font-bold text-sm text-primary mb-2">
                                         {day.date}
                                     </div>
                                     <div className="space-y-1">
@@ -199,7 +199,7 @@ function CalendarView({ reservations, onDelete }) {
                                 <div>
                                     <div className="flex items-center gap-2 mb-2">
                                         {getBookingIcon(selectedBooking.booking_type)}
-                                        <h3 className="text-2xl font-bold text-coffee-bean">
+                                        <h3 className="text-2xl font-bold text-primary">
                                             {getBookingTypeLabel(selectedBooking.booking_type)}
                                         </h3>
                                     </div>
@@ -218,18 +218,18 @@ function CalendarView({ reservations, onDelete }) {
                             <div className="space-y-4">
                                 {/* Customer Info */}
                                 <div className="bg-gray-50 rounded-xl p-4">
-                                    <h4 className="font-bold text-coffee-bean mb-3">Customer Information</h4>
+                                    <h4 className="font-bold text-primary mb-3">Customer Information</h4>
                                     <div className="space-y-2 text-sm">
                                         <div className="flex justify-between">
-                                            <span className="text-slate-grey">Name:</span>
+                                            <span className="text-primary/60">Name:</span>
                                             <span className="font-medium">{selectedBooking.name}</span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="text-slate-grey">Email:</span>
+                                            <span className="text-primary/60">Email:</span>
                                             <span className="font-medium">{selectedBooking.email}</span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="text-slate-grey">Phone:</span>
+                                            <span className="text-primary/60">Phone:</span>
                                             <span className="font-medium">{selectedBooking.phone}</span>
                                         </div>
                                     </div>
@@ -237,46 +237,46 @@ function CalendarView({ reservations, onDelete }) {
 
                                 {/* Event Details */}
                                 <div className="bg-gray-50 rounded-xl p-4">
-                                    <h4 className="font-bold text-coffee-bean mb-3">Event Details</h4>
+                                    <h4 className="font-bold text-primary mb-3">Event Details</h4>
                                     <div className="space-y-2 text-sm">
                                         <div className="flex items-center gap-2">
-                                            <Calendar size={16} className="text-sunflower" />
+                                            <Calendar size={16} className="text-accent" />
                                             <span className="font-medium">{selectedBooking.date}</span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Clock size={16} className="text-sunflower" />
+                                            <Clock size={16} className="text-accent" />
                                             <span className="font-medium">{selectedBooking.time}</span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Users size={16} className="text-sunflower" />
+                                            <Users size={16} className="text-accent" />
                                             <span className="font-medium">{selectedBooking.guests} Guests</span>
                                         </div>
                                         
                                         {/* Type-specific fields */}
                                         {(selectedBooking.booking_type === 'private_event' || selectedBooking.booking_type === 'catering') && selectedBooking.event_type && (
                                             <div className="flex justify-between">
-                                                <span className="text-slate-grey">Event Type:</span>
+                                                <span className="text-primary/60">Event Type:</span>
                                                 <span className="font-medium capitalize">{selectedBooking.event_type.replace('_', ' ')}</span>
                                             </div>
                                         )}
                                         
                                         {selectedBooking.booking_type === 'private_event' && selectedBooking.duration && (
                                             <div className="flex justify-between">
-                                                <span className="text-slate-grey">Duration:</span>
+                                                <span className="text-primary/60">Duration:</span>
                                                 <span className="font-medium">{selectedBooking.duration}</span>
                                             </div>
                                         )}
                                         
                                         {selectedBooking.booking_type === 'catering' && selectedBooking.venue && (
                                             <div className="flex items-center gap-2">
-                                                <MapPin size={16} className="text-sunflower" />
+                                                <MapPin size={16} className="text-accent" />
                                                 <span className="font-medium capitalize">{selectedBooking.venue.replace(/-/g, ' ')}</span>
                                             </div>
                                         )}
                                         
                                         {selectedBooking.budget && (
                                             <div className="flex items-center gap-2">
-                                                <DollarSign size={16} className="text-sunflower" />
+                                                <DollarSign size={16} className="text-accent" />
                                                 <span className="font-medium">{selectedBooking.budget}</span>
                                             </div>
                                         )}
@@ -286,8 +286,8 @@ function CalendarView({ reservations, onDelete }) {
                                 {/* Special Requests */}
                                 {selectedBooking.special_requests && (
                                     <div className="bg-gray-50 rounded-xl p-4">
-                                        <h4 className="font-bold text-coffee-bean mb-2">Special Requests</h4>
-                                        <p className="text-sm text-slate-grey">{selectedBooking.special_requests}</p>
+                                        <h4 className="font-bold text-primary mb-2">Special Requests</h4>
+                                        <p className="text-sm text-primary/60">{selectedBooking.special_requests}</p>
                                     </div>
                                 )}
                             </div>
@@ -307,7 +307,7 @@ function CalendarView({ reservations, onDelete }) {
                                 </button>
                                 <button
                                     onClick={() => setSelectedBooking(null)}
-                                    className="flex-1 bg-coffee-bean text-white font-bold py-3 rounded-xl hover:bg-graphite transition-all"
+                                    className="flex-1 bg-primary text-white font-bold py-3 rounded-xl hover:bg-secondary transition-all"
                                 >
                                     Close
                                 </button>

@@ -5,81 +5,79 @@ import { usePWA } from '../hooks/usePWA';
 function Footer({ showMap }) {
     const { isInstallable, installPWA, isStandalone, isIOS } = usePWA();
     return (
-        <footer className="bg-coffee-bean text-white pt-6 pb-6">
-            <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-4">
+        <footer className="bg-primary text-white pt-12 pb-8 border-t border-accent/20">
+            <div className="max-w-7xl mx-auto px-4">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6 pb-8 border-b border-white/10 mb-8">
                     <div className="flex items-center gap-3">
-                        <img src="/android-chrome-512x512.png" alt="Dosa Spot Logo" className="w-12 h-12 rounded-full bg-white object-contain shadow-sm" />
-                        <div className="flex flex-col items-center">
-                            <span className="text-3xl font-bold text-white leading-none header-text-regular">
-                                The Dosa <span className="text-sunflower">Spot</span>
+                        <img src="/android-chrome-512x512.png" alt="Dosa Spot Logo" className="w-12 h-12 rounded-full border border-accent/30 bg-white object-contain shadow-sm" />
+                        <div className="flex flex-col">
+                            <span className="text-2xl font-black text-white leading-none tracking-tight">
+                                The Dosa Spot
                             </span>
-                            <span className="text-xs font-medium text-silver/80 uppercase tracking-[0.3em] w-full text-center border-t border-silver/20 mt-1 pt-1 leading-none">
-                                Ottawa
-                            </span>
+                            <span className="text-[10px] text-accent font-black uppercase tracking-widest mt-1">Authentic Flavors</span>
                         </div>
                     </div>
-                    <div className="flex flex-col md:flex-row items-center gap-4">
-                        <div className="flex gap-3">
-                            <a href="https://www.instagram.com/the_dosaspot_ottawa/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-sunflower-yellow hover:text-white transition-all">
-                                <Instagram size={20} />
+                    <div className="flex flex-col md:flex-row items-center gap-6">
+                        <div className="flex gap-4">
+                            <a href="https://www.instagram.com/the_dosaspot_ottawa/" target="_blank" rel="noopener noreferrer" className="size-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-accent hover:text-primary transition-all shadow-inner">
+                                <Instagram size={18} />
                             </a>
-                            <a href="https://maps.app.goo.gl/WMnuVqZLdb7vGn3M8" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-sunflower-yellow hover:text-white transition-all">
-                                <Map size={20} />
+                            <a href="https://maps.app.goo.gl/WMnuVqZLdb7vGn3M8" target="_blank" rel="noopener noreferrer" className="size-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-accent hover:text-primary transition-all shadow-inner">
+                                <Map size={18} />
                             </a>
                         </div>
 
                         {isInstallable && !isStandalone && !isIOS && (
                             <button
                                 onClick={installPWA}
-                                className="flex items-center gap-2 bg-sunflower text-coffee-bean px-5 py-2.5 rounded-full font-bold hover:bg-sunflower/90 transition-all text-sm animate-bounce shadow-lg"
+                                className="flex items-center gap-2 bg-accent text-primary px-6 py-2.5 rounded-full font-black hover:bg-white transition-all text-xs shadow-xl"
                             >
-                                <Download size={18} />
+                                <Download size={16} />
                                 Install App
                             </button>
                         )}
                     </div>
                 </div>
-                <div className={`grid grid-cols-1 ${showMap ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-8 mb-8`}>
+                <div className={`grid grid-cols-1 ${showMap ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-12 mb-12`}>
 
                     <div>
-                        <h4 className="text-lg font-bold mb-4 text-sunflower">Contact Info</h4>
-                        <ul className="space-y-3 text-sm">
-                            <li className="flex gap-3 text-silver/80 items-start">
-                                <MapPin className="text-sunflower flex-shrink-0 mt-0.5" size={18} />
+                        <h4 className="text-xs font-black mb-6 text-accent uppercase tracking-[0.2em]">Contact Info</h4>
+                        <ul className="space-y-4 text-sm font-light">
+                            <li className="flex gap-4 text-white/70 items-start">
+                                <MapPin className="text-accent flex-shrink-0" size={18} />
                                 895 Bank St, Ottawa, ON K1S 3W4
                             </li>
-                            <li className="flex gap-3 text-silver/80 items-center">
-                                <Phone className="text-sunflower flex-shrink-0" size={18} />
+                            <li className="flex gap-4 text-white/70 items-center">
+                                <Phone className="text-accent flex-shrink-0" size={18} />
                                 +1 613-233-7739
                             </li>
-                            <li className="flex gap-3 text-silver/80 items-center">
-                                <Mail className="text-sunflower flex-shrink-0" size={18} />
+                            <li className="flex gap-4 text-white/70 items-center">
+                                <Mail className="text-accent flex-shrink-0" size={18} />
                                 hello@thedosaspot.ca
                             </li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4 className="text-lg font-bold mb-4 text-sunflower">Opening Hours</h4>
-                        <ul className="space-y-2 text-silver/80 text-sm">
+                        <h4 className="text-xs font-black mb-6 text-accent uppercase tracking-[0.2em]">Opening Hours</h4>
+                        <ul className="space-y-3 text-white/60 text-sm font-light">
                             <li className="flex justify-between">
                                 <span>Mon - Thu</span>
-                                <span>11 AM - 9 PM</span>
+                                <span className="text-white font-medium">11 AM - 9 PM</span>
                             </li>
-                            <li className="flex justify-between font-bold text-white border-y border-white/10 py-1">
+                            <li className="flex justify-between text-accent font-bold py-1">
                                 <span>Fri - Sat</span>
-                                <span>11 AM - 11 PM</span>
+                                <span className="font-black">11 AM - 11 PM</span>
                             </li>
                             <li className="flex justify-between">
                                 <span>Sunday</span>
-                                <span>11 AM - 10 PM</span>
+                                <span className="text-white font-medium">11 AM - 10 PM</span>
                             </li>
                         </ul>
                     </div>
                     {showMap && (
                         <div>
-                            <div className="rounded-xl overflow-hidden border border-white/10 h-32 w-full shadow-md">
+                            <div className="rounded-2xl overflow-hidden border border-white/10 h-32 w-full shadow-2xl">
                                 <iframe
                                     width="100%"
                                     height="100%"
@@ -95,8 +93,8 @@ function Footer({ showMap }) {
                         </div>
                     )}
                 </div>
-                <div className="border-t border-white/5 pt-6 text-center text-silver/60 text-xs">
-                    <p>© {new Date().getFullYear()} The Dosa Spot. All rights reserved.</p>
+                <div className="border-t border-white/5 pt-8 text-center text-white/30 text-[10px] font-bold tracking-widest uppercase">
+                    <p>© {new Date().getFullYear()} The Dosa Spot. Authentic Flavors, Modern Kitchen.</p>
                 </div>
             </div>
         </footer>

@@ -1,73 +1,144 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Flame, UtensilsCrossed } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, UtensilsCrossed } from 'lucide-react';
 
-const FlipPage = ({ index, isFlipped, children, totalSheets, currentSplit }) => {
-    // PHYSICAL Z-INDEX LOGIC
-    // The active page flipping must always be on top.
-    const isAtSplit = index === currentSplit || index === currentSplit - 1;
-    const baseZIndex = isFlipped ? index : (totalSheets - index);
-    const zIndex = isAtSplit ? 100 : baseZIndex;
+const PaperTexture = () => (
+    <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-multiply"
+        style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+        }}
+    />
+);
 
+const DottedLeader = ({ label, price, description }) => (
+    <div className="group mb-5">
+        <div className="flex items-baseline mb-1">
+            <h4 className="text-[#2d1e12] font-black text-sm tracking-wide group-hover:text-[#d4a017] transition-colors font-display">{label}</h4>
+            <div className="grow mx-2 border-b-2 border-dotted border-[#2d1e12]/20 relative -top-1"></div>
+            <span className="text-[#d4a017] font-black font-display">{price}</span>
+        </div>
+        {description && <p className="text-[#2d1e12]/70 text-xs font-medium italic leading-relaxed">{description}</p>}
+    </div>
+);
+
+// Page Content Components
+const CoverContent = () => (
+    <div className="w-full h-full flex flex-col items-center justify-center p-8 border-[12px] border-[#2d1e12] relative bg-[#2d1e12]">
+        <div className="absolute inset-2 border-2 border-[#d4a017]/30 rounded-sm pointer-events-none"></div>
+        <div className="flex flex-col items-center justify-center h-full w-full bg-[#2d1e12] text-[#d4a017] border-4 border-[#2d1e12] shadow-inner relative overflow-hidden">
+            {/* Leather Texture */}
+            <div className="absolute inset-0 opacity-40" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/dark-leather.png")' }}></div>
+
+            <div className="relative z-10 flex flex-col items-center">
+                <div className="w-20 h-20 mb-8 text-[#d4a017] drop-shadow-lg">
+                    <img src="/android-chrome-512x512.png" alt="Logo" className="w-full h-full object-contain" />
+                </div>
+                <h1 className="text-4xl md:text-5xl text-center mb-4 font-script text-[#d4a017]" style={{ fontFamily: '"Twinkle Star", cursive' }}>The Dosa Spot</h1>
+                <div className="w-24 h-0.5 bg-[#d4a017] mb-4"></div>
+                <p className="text-[10px] tracking-[0.4em] uppercase font-bold text-[#d4a017]/80">Est. 1982</p>
+            </div>
+        </div>
+    </div>
+);
+
+const BackCoverContent = () => (
+    <div className="w-full h-full flex flex-col items-center justify-center p-12 bg-[#2d1e12] relative">
+        <div className="absolute inset-0 opacity-40 mix-blend-overlay" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/dark-leather.png")' }}></div>
+        <div className="relative z-10 text-center">
+            <UtensilsCrossed className="w-16 h-16 text-[#d4a017]/30 mx-auto mb-6" />
+            <h2 className="text-2xl text-[#d4a017] font-script mb-2" style={{ fontFamily: '"Twinkle Star", cursive' }}>Thank You</h2>
+            <p className="text-[#d4a017]/60 text-xs tracking-widest uppercase">For dining with us</p>
+        </div>
+    </div>
+);
+
+const MenuPageContent = ({ title, items, pageNum, isLeft }) => (
+    <div className="w-full h-full p-8 flex flex-col relative overflow-hidden bg-[#fdfcfb]">
+        <PaperTexture />
+
+        {/* Decorative Corner */}
+        {isLeft ? (
+            <div className="absolute top-0 left-0 p-4">
+                <div className="w-12 h-12 border-t-2 border-l-2 border-[#d4a017]/20 rounded-tl-xl"></div>
+            </div>
+        ) : (
+            <div className="absolute top-0 right-0 p-4">
+                <div className="w-12 h-12 border-t-2 border-r-2 border-[#d4a017]/20 rounded-tr-xl"></div>
+            </div>
+        )}
+
+        <div className="text-center mb-8 relative z-10">
+            <h3 className="text-2xl text-[#2d1e12] mb-2 font-script" style={{ fontFamily: '"Twinkle Star", cursive' }}>{title}</h3>
+            <div className="w-8 h-1 bg-[#d4a017] mx-auto rounded-full opacity-60"></div>
+        </div>
+
+        <div className="flex-1 relative z-10">
+            {items && items.map((item, idx) => (
+                <DottedLeader key={idx} label={item.name} price={item.price} description={item.description} />
+            ))}
+        </div>
+
+        <div className="mt-auto pt-4 flex justify-between items-end relative z-10">
+            <span className="text-[8px] text-[#2d1e12]/40 tracking-widest uppercase">{isLeft ? pageNum : "The Dosa Spot"}</span>
+            <span className="text-[8px] text-[#2d1e12]/40 tracking-widest uppercase">{isLeft ? "The Dosa Spot" : pageNum}</span>
+        </div>
+
+        {/* Inner Spine Shadow */}
+        <div className={`absolute inset-y-0 w-12 pointer-events-none ${isLeft ? 'right-0 bg-gradient-to-l' : 'left-0 bg-gradient-to-r'} from-black/10 to-transparent`} />
+    </div>
+);
+
+// Single Page Component (Front + Back)
+const FlipPageSheet = ({ index, isFlipped, zIndex, frontContent, backContent }) => {
     return (
         <motion.div
-            initial={false}
+            className="absolute top-0 right-0 w-full h-full origin-left bg-[#fdfcfb] rounded-r-lg antialiased-3d"
+            initial={{ rotateY: 0 }}
             animate={{
                 rotateY: isFlipped ? -180 : 0,
                 zIndex: zIndex
             }}
             transition={{
-                rotateY: { duration: 1.2, ease: [0.645, 0.045, 0.355, 1.0] },
-                zIndex: { duration: 0 }
+                rotateY: { duration: 1.5, ease: [0.645, 0.045, 0.355, 1.0] }, // Custom bezier for realistic weight
+                zIndex: { delay: isFlipped ? 0.75 : 0.75 } // Swap z-index halfway through flip
             }}
-            className="absolute top-0 right-0 w-1/2 h-full origin-left transform-style-3d bg-[#fdfcfb] rounded-r-[2rem]"
             style={{
                 transformStyle: 'preserve-3d',
-                opacity: 1 // Explicitly set full opacity
+                width: '100%',
+                height: '100%'
             }}
         >
-            {/* FRONT FACE (Visible on the right side) */}
+            {/* FRONT FACE (Visible when page is on the RIGHT stack) */}
             <div
-                className="absolute inset-0 w-full h-full bg-[#fdfcfb] border-l border-black/10 overflow-hidden rounded-r-[2rem] shadow-[-20px_0_50px_rgba(0,0,0,0.1)]"
-                style={{
-                    backfaceVisibility: 'hidden',
-                    WebkitBackfaceVisibility: 'hidden',
-                    zIndex: 2,
-                    opacity: 1 // Ensure full opacity
-                }}
+                className="absolute inset-0 w-full h-full backface-hidden bg-[#fdfcfb] rounded-r-lg overflow-hidden shadow-md page-content-layer"
+                style={{ backfaceVisibility: 'hidden' }}
             >
-                {children[0]}
-                {/* Subtle depth gradient at the spine */}
-                <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-black/10 to-transparent pointer-events-none" />
+                {frontContent}
 
-                {/* Dynamic Shadow Layer - Darkens slightly as it flips up */}
+                {/* Dynamic Lighting: Highlight when flat, shadow when flipping */}
                 <motion.div
-                    animate={{ opacity: isFlipped ? 0.15 : 0 }}
-                    className="absolute inset-0 bg-black/20 pointer-events-none"
-                    transition={{ duration: 0.6 }}
+                    className="absolute inset-0 bg-black pointer-events-none"
+                    animate={{ opacity: isFlipped ? 0.3 : 0 }}
+                    transition={{ duration: 1.5 }}
                 />
             </div>
 
-            {/* BACK FACE (Visible on the left side) */}
+            {/* BACK FACE (Visible when page is on the LEFT stack) */}
             <div
-                className="absolute inset-0 w-full h-full bg-[#fdfcfb] border-r border-black/10 overflow-hidden rounded-l-[2rem] shadow-[20px_0_50px_rgba(0,0,0,0.1)]"
+                className="absolute inset-0 w-full h-full backface-hidden bg-[#fdfcfb] rounded-l-lg overflow-hidden shadow-md page-content-layer"
                 style={{
                     transform: 'rotateY(180deg)',
                     backfaceVisibility: 'hidden',
-                    WebkitBackfaceVisibility: 'hidden',
-                    zIndex: 1,
-                    opacity: 1 // Ensure full opacity
+                    borderRadius: '5px 0 0 5px' // Rounded on left side
                 }}
             >
-                {children[1]}
-                {/* Subtle depth gradient at the spine */}
-                <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-black/10 to-transparent pointer-events-none" />
+                {backContent}
 
-                {/* Dynamic Highlight Layer - Brightens as it lands on the left */}
+                {/* Dynamic Lighting: Shadow coming from right, highlight when flat */}
                 <motion.div
-                    animate={{ opacity: isFlipped ? 0 : 0.15 }}
-                    className="absolute inset-0 bg-black/20 pointer-events-none"
-                    transition={{ duration: 0.6 }}
+                    className="absolute inset-0 bg-black pointer-events-none"
+                    animate={{ opacity: isFlipped ? 0 : 0.3 }}
+                    transition={{ duration: 1.5 }}
                 />
             </div>
         </motion.div>
@@ -75,175 +146,200 @@ const FlipPage = ({ index, isFlipped, children, totalSheets, currentSplit }) => 
 };
 
 const BookMenu = ({ categories, isLoading, isOpen, onClose }) => {
-    const [flippedPages, setFlippedPages] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [bookData, setBookData] = useState([]);
 
     useEffect(() => {
-        if (!isOpen) setFlippedPages([]);
+        if (!isOpen) setCurrentPage(0);
     }, [isOpen]);
 
-    if (!isOpen) return null;
+    // Handle ESC
+    useEffect(() => {
+        const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
+        window.addEventListener('keydown', handleEsc);
+        return () => window.removeEventListener('keydown', handleEsc);
+    }, [onClose]);
 
-    // Content preparation
-    const itemsPerPage = 6;
-    let menuPages = [];
-    const allItems = (categories || []).flatMap(cat =>
-        (cat.items || []).map(item => ({ ...item, categoryName: cat.name }))
-    );
+    // PREPARE DATA
+    useEffect(() => {
+        if (!categories) return;
 
-    for (let i = 0; i < allItems.length; i += itemsPerPage) {
-        menuPages.push({ type: 'menu', items: allItems.slice(i, i + itemsPerPage) });
-    }
+        // Flatten items for pagination
+        // Let's create specific "sheets"
+        // Sheet 0: Front=Cover, Back=InsideFront(Empty/Intro)
 
-    const sheets = [];
-    sheets.push({ front: { type: 'cover' }, back: menuPages[0] || { type: 'empty' } });
+        let sheets = [];
 
-    for (let i = 1; i < menuPages.length; i += 2) {
+        // 1. Cover Sheet
         sheets.push({
-            front: menuPages[i],
-            back: menuPages[i + 1] || { type: 'back_cover' }
+            front: <CoverContent />,
+            back: <div className="w-full h-full bg-[#fdfcfb] flex items-center justify-center italic text-[#2d1e12]/50 font-serif p-8 text-center">"A culinary journey through the streets of Chennai."</div>
         });
-    }
 
-    if (sheets[sheets.length - 1].back?.type !== 'back_cover') {
-        sheets.push({ front: { type: 'empty' }, back: { type: 'back_cover' } });
-    }
+        // 2. Menu Sheets
+        // We need to chunk items. 
+        const itemsPerPage = 5;
+        const allItems = categories.flatMap(cat => cat.items.map(i => ({ ...i, category: cat.name })));
 
-    const nextSheet = () => {
-        if (flippedPages.length < sheets.length) {
-            setFlippedPages([...flippedPages, flippedPages.length]);
+        // Group by category smartly? Or just flow.
+        // Let's just create pages of content.
+        let pages = [];
+        categories.forEach(cat => {
+            for (let i = 0; i < cat.items.length; i += itemsPerPage) {
+                pages.push({
+                    title: i === 0 ? cat.name : `${cat.name} (cont.)`,
+                    items: cat.items.slice(i, i + itemsPerPage)
+                });
+            }
+        });
+
+        // Pair pages into sheets
+        // Page 1 (Front of Sheet 1), Page 2 (Back of Sheet 1) -- WAIT
+        // NO. Reference style logic:
+        // Divs are stacked. Each div is a "Sheet".
+        // Sheet 1: Front (Right side Page 1), Back (Left side Page 2)
+        // Sheet 2: Front (Right side Page 3), Back (Left side Page 4)
+
+        // My Logic:
+        // Sheet 0 (Cover): Front=Cover, Back=Intro
+        // Sheet 1: Front=First Menu Page, Back=Second Menu Page
+
+        for (let i = 0; i < pages.length; i += 2) {
+            sheets.push({
+                front: <MenuPageContent title={pages[i].title} items={pages[i].items} pageNum={i + 1} isLeft={false} />,
+                back: pages[i + 1] ? <MenuPageContent title={pages[i + 1].title} items={pages[i + 1].items} pageNum={i + 2} isLeft={true} /> : <div className="w-full h-full bg-[#fdfcfb]" />
+            })
         }
+
+        // 3. Back Cover Sheet
+        // If odd number of content sheets, add one for back cover
+        sheets.push({
+            front: <div className="w-full h-full bg-[#fdfcfb] flex items-center justify-center"><div className="w-16 h-1 bg-[#d4a017]/20"></div></div>,
+            back: <BackCoverContent />
+        });
+
+        setBookData(sheets);
+
+    }, [categories]);
+
+    if (!isOpen || bookData.length === 0) return null;
+
+    const totalSheets = bookData.length;
+
+    const nextPage = () => {
+        if (currentPage < totalSheets) setCurrentPage(p => p + 1);
     };
 
-    const prevSheet = () => {
-        if (flippedPages.length > 0) {
-            setFlippedPages(flippedPages.slice(0, -1));
-        }
-    };
-
-    const renderContent = (content) => {
-        if (!content || content.type === 'empty') return <div className="w-full h-full bg-[#f4f1ea] border-x border-black/5" />;
-
-        switch (content.type) {
-            case 'cover':
-                return (
-                    <div className="w-full h-full bg-primary flex flex-col items-center justify-center text-center p-8">
-                        <div className="size-24 bg-white rounded-full p-4 mb-6 shadow-2xl">
-                            <img src="/android-chrome-512x512.png" alt="Logo" className="w-full h-full object-contain" />
-                        </div>
-                        <h1 className="text-white text-4xl font-black mb-3 uppercase tracking-tighter font-display">THE <span className="text-accent">DOSA SPOT</span></h1>
-                        <div className="w-12 h-1 bg-accent/40 rounded-full mb-2" />
-                        <p className="text-accent/80 text-[10px] font-black tracking-[0.6em] uppercase">Authentic South Indian Journey</p>
-                    </div>
-                );
-            case 'menu':
-                return (
-                    <div className="w-full h-full p-8 flex flex-col bg-[#fdfcfb]">
-                        <div className="mb-6">
-                            <h3 className="text-primary text-[10px] font-black uppercase tracking-[0.4em] mb-1">Traditional Menu</h3>
-                            <div className="h-0.5 w-8 bg-accent" />
-                        </div>
-                        <div className="flex-1 space-y-4">
-                            {(content.items || []).map((item, i) => (
-                                <div key={i} className="group border-l border-primary/10 pl-4 py-1">
-                                    <div className="flex justify-between items-baseline gap-2">
-                                        <h4 className="font-black text-primary uppercase text-[11px] group-hover:text-accent transition-colors">{item.name}</h4>
-                                        <div className="h-[1px] flex-1 bg-primary/5 border-b border-dashed" />
-                                        <span className="text-secondary font-black text-xs">{item.price}</span>
-                                    </div>
-                                    <p className="text-[9px] text-primary/50 font-medium leading-relaxed italic line-clamp-2">{item.description}</p>
-                                </div>
-                            ))}
-                        </div>
-                        <div className="mt-4 pt-4 border-t border-primary/5 flex justify-between items-center text-[7px] text-primary/30 font-black uppercase tracking-widest">
-                            <span>Handcrafted with Love</span>
-                            <span>Ottawa, ON</span>
-                        </div>
-                    </div>
-                );
-            case 'back_cover':
-                return (
-                    <div className="w-full h-full bg-secondary flex flex-col items-center justify-center text-center p-8">
-                        <div className="p-4 bg-white/5 rounded-full mb-6">
-                            <UtensilsCrossed className="text-accent/20" size={48} />
-                        </div>
-                        <h1 className="text-white text-3xl font-black mb-4 uppercase italic tracking-tight">Pure South Indian Soul</h1>
-                        <div className="w-8 h-1 bg-accent/30 rounded-full" />
-                        <p className="mt-8 text-accent/60 text-[9px] font-black uppercase tracking-[0.4em]">Visit us again soon</p>
-                    </div>
-                );
-            default: return null;
-        }
+    const prevPage = () => {
+        if (currentPage > 0) setCurrentPage(p => p - 1);
     };
 
     return (
         <AnimatePresence>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-4 overflow-hidden"
-            >
-                {/* Background Overlay */}
-                <div className="absolute inset-0" onClick={onClose} />
-
-                {/* Close Button UI */}
-                <button
-                    onClick={onClose}
-                    className="absolute top-6 right-6 p-4 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all z-[110]"
+            {isOpen && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-xl overflow-hidden"
                 >
-                    <X size={24} />
-                </button>
+                    {/* Close Button */}
+                    <button
+                        onClick={onClose}
+                        className="absolute top-6 right-6 z-[110] p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all"
+                    >
+                        <X size={24} />
+                    </button>
 
-                {/* PHYSICAL BOOK CONTAINER */}
-                <div className="relative w-full max-w-4xl aspect-[1.6/1] perspective-3000 transition-all z-10 pointer-events-none">
-
-                    {/* Shadow tray for ground effect */}
-                    <div className="absolute -inset-20 bg-black/70 blur-[150px] rounded-full" />
-
-                    {/* The Fixed Book Cover Hub */}
-                    <div className="absolute inset-0 flex rounded-[3rem] overflow-hidden border-[16px] border-[#2d1e12] shadow-[0_60px_120px_rgba(0,0,0,1)]">
-                        <div className="flex-1 bg-[#2d1e12] border-r border-white/5" />
-                        <div className="flex-1 bg-[#2d1e12]" />
-                    </div>
-
-                    {/* Stacking Sheets */}
-                    {sheets.map((sheet, idx) => (
-                        <FlipPage
-                            key={idx}
-                            index={idx}
-                            isFlipped={flippedPages.includes(idx)}
-                            totalSheets={sheets.length}
-                            currentSplit={flippedPages.length}
+                    {/* Book Container */}
+                    {/* 
+                       Logic:
+                       - We render a single stack of sheets.
+                       - We shift the whole container when opened (current > 0) to center the spine.
+                       - Base width is single page width.
+                    */}
+                    <div className="relative h-[600px] w-[350px] md:h-[700px] md:w-[450px] perspective-[2000px]">
+                        <motion.div
+                            className="relative w-full h-full"
+                            style={{ transformStyle: 'preserve-3d' }}
+                            animate={{
+                                translateX: currentPage > 0 ? '50%' : '0%'
+                            }}
+                            transition={{ duration: 1, ease: 'easeInOut' }}
                         >
-                            {[renderContent(sheet.front), renderContent(sheet.back)]}
-                        </FlipPage>
-                    ))}
+                            {/* Static Back Cover (The board under the stack) */}
+                            <div className="absolute inset-0 bg-[#1a110a] rounded-r-lg shadow-2xl"
+                                style={{ transform: 'translateZ(-2px)' }}
+                            />
 
-                    {/* Nav Areas */}
-                    <div className="absolute inset-0 flex z-[105] pointer-events-auto">
-                        <div className="flex-1 cursor-w-resize group" onClick={(e) => { e.stopPropagation(); prevSheet(); }}>
-                            <div className="absolute left-6 top-1/2 -translate-y-1/2 p-4 bg-black/60 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all">
-                                <ChevronLeft size={24} />
-                            </div>
-                        </div>
-                        <div className="flex-1 cursor-e-resize group" onClick={(e) => { e.stopPropagation(); nextSheet(); }}>
-                            <div className="absolute right-6 top-1/2 -translate-y-1/2 p-4 bg-black/60 rounded-full text-white opacity-0 group-hover:opacity-100 transition-all">
-                                <ChevronRight size={24} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            {/* Render Sheets in Reverse Order (Bottom up) so z-index defaults work? 
+                                Actually, we manually control z-index.
+                            */}
+                            {bookData.map((sheet, index) => {
+                                // Z-INDEX LOGIC
+                                // If I am index 0 (Cover)
+                                // Not flipped: High Z (Top of right stack)
+                                // Flipped: Low Z (Bottom of left stack)
 
-                {/* Tracking Dots */}
-                <div className="absolute bottom-6 flex flex-col items-center gap-3 z-[110] pointer-events-none">
-                    <div className="flex gap-1.5">
-                        {sheets.map((_, idx) => (
-                            <div key={idx} className={`h-1.5 transition-all duration-700 rounded-full ${flippedPages.length === idx ? 'w-12 bg-accent' : 'w-2 bg-white/20'}`} />
-                        ))}
+                                // Right Stack Order (Top to Bottom): 0, 1, 2...
+                                // Left Stack Order (Bottom to Top): 0, 1, 2...
+
+                                // Wait, the reference says:
+                                // Page 1 (Cover equivalent): Z=8
+                                // Page 2: Z=5...
+                                // Checked Page 1 (Flipped): Z=3
+                                // Checked Page 2 (Flipped): Z=4
+
+                                // General formula:
+                                // Is Flipped?
+                                // YES: zIndex = index (Higher index is on top of Lower index on left side)
+                                // NO: zIndex = totalSheets - index (Lower index is on top of Higher index on right side)
+
+                                const isFlipped = currentPage > index; // If current is 1 (Open), Cover(0) is flipped.
+                                const zIndex = isFlipped ? index : (totalSheets - index + 1);
+
+                                return (
+                                    <FlipPageSheet
+                                        key={index}
+                                        index={index}
+                                        isFlipped={isFlipped}
+                                        zIndex={zIndex}
+                                        frontContent={sheet.front}
+                                        backContent={sheet.back}
+                                    />
+                                );
+                            })}
+                        </motion.div>
                     </div>
-                    <p className="text-white/40 text-[9px] font-black uppercase tracking-[0.6em]">Tap edges to flip</p>
-                </div>
-            </motion.div>
+
+                    {/* Controls */}
+                    <div className="absolute bottom-10 flex gap-4 text-white/50 z-[110]">
+                        <button
+                            onClick={prevPage}
+                            disabled={currentPage === 0}
+                            className="p-4 rounded-full border border-white/10 hover:bg-white/10 disabled:opacity-20 transition-all"
+                        >
+                            <ChevronLeft />
+                        </button>
+                        <p className="py-4 text-xs font-black tracking-widest uppercase">
+                            {currentPage === 0 ? "Tap to Open" : `${currentPage} / ${totalSheets}`}
+                        </p>
+                        <button
+                            onClick={nextPage}
+                            disabled={currentPage === totalSheets}
+                            className="p-4 rounded-full border border-white/10 hover:bg-white/10 disabled:opacity-20 transition-all"
+                        >
+                            <ChevronRight />
+                        </button>
+                    </div>
+
+                    {/* Click zones for easier navigation */}
+                    <div className="absolute top-0 left-0 w-1/3 h-full z-[100] cursor-w-resize" onClick={prevPage} />
+                    <div className="absolute top-0 right-0 w-1/3 h-full z-[100] cursor-e-resize" onClick={nextPage} />
+
+                </motion.div>
+            )}
         </AnimatePresence>
     );
 };

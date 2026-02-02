@@ -68,6 +68,7 @@ h2 {
   scrollbar-width: none;
 }
 
+/* 3D PERFORMANCE UTILITIES */
 .perspective-3000 {
   perspective: 3000px;
 }
@@ -79,4 +80,19 @@ h2 {
 .backface-hidden {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* Fix for text jaggedness/breaking during 3D rotation */
+.antialiased-3d {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateZ(0);
+  /* Hardware acceleration hack */
+  will-change: transform;
+}
+
+/* Prevent flickering text during flip */
+.page-content-layer {
+  transform: translateZ(1px);
+  /* Slight lift to prevent z-fighting */
 }

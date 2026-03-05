@@ -10,7 +10,10 @@ from routers import menu, reservations, banners
 from auth import verify_password, create_access_token, AdminLoginRequest, AdminLoginResponse
 
 # Create tables
-Base.metadata.create_all(bind=engine)
+try:
+    Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(f"SCHEMA CREATION ERROR: {e}")
 
 app = FastAPI(title="Dosa Spot API")
 

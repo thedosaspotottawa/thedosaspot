@@ -13,6 +13,7 @@ import IOSInstallPrompt from './components/IOSInstallPrompt';
 import Banner from './components/Banner';
 import Specialties from './components/Specialties';
 import Galleries from './components/Galleries';
+import Story from './components/Story';
 import { LeafyGreen, Salad, Flame } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -118,63 +119,6 @@ function App() {
               </section>
 
               <Specialties />
-              <section className="bg-background-light dark:bg-primary/5 py-32 overflow-hidden" id="story">
-                <div className="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-                  <div className="relative">
-                    <div className="absolute -top-10 -left-10 size-40 bg-accent/20 rounded-full blur-3xl"></div>
-                    <div className="grid grid-cols-2 gap-6">
-                      <div className="space-y-6 pt-8">
-                        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ aspectRatio: '3/4' }}>
-                          <img className="w-full h-full object-cover" alt="Traditional Indian spice market"
-                            src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600" />
-                        </div>
-                        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ aspectRatio: '1/1' }}>
-                          <img className="w-full h-full object-cover" alt="South Indian street food preparation"
-                            src="https://images.unsplash.com/photo-1620244675971-d602123cc096?auto=format&fit=crop&q=80&w=600" />
-                        </div>
-                      </div>
-                      <div className="space-y-6">
-                        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ aspectRatio: '1/1' }}>
-                          <img className="w-full h-full object-cover" alt="Traditional South Indian kitchen setting"
-                            src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=600" />
-                        </div>
-                        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ aspectRatio: '3/4' }}>
-                          <img className="w-full h-full object-cover" alt="Fresh organic ingredients bowl"
-                            src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=600" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-col gap-8 text-secondary">
-                    <span className="font-bold tracking-[0.2em] text-sm uppercase text-accent">Tradition Meets Excellence</span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight text-primary">Our Journey From The Streets of Chennai</h2>
-                    <p className="text-lg leading-relaxed text-primary/80">
-                      Started as a small family recipe handed down through three generations, The Dosa Spot was born out
-                      of a passion for sharing the true soul of South Indian cuisine.
-                      <br /><br />
-                      We believe in the slow art of fermentation, the precise sizzle of the stone griddle, and the vibrant
-                      kick of hand-ground spices. Every dish we serve is a tribute to the bustling food stalls of Tamil
-                      Nadu.
-                    </p>
-                    <div className="grid grid-cols-2 gap-8 py-4">
-                      <div className="flex items-start gap-3">
-                        <Salad className="text-accent" />
-                        <div>
-                          <h4 className="font-bold text-primary">Fresh Daily</h4>
-                          <p className="text-sm opacity-70 text-primary">Organic ingredients sourced every morning.</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <LeafyGreen className="text-accent" />
-                        <div>
-                          <h4 className="font-bold text-primary">Original Spices</h4>
-                          <p className="text-sm opacity-70 text-primary">Ground in-house for maximum aroma.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
 
               {/* Page Break Element */}
               <section className="py-16 text-center bg-background-light">
@@ -231,6 +175,18 @@ function App() {
               transition={{ duration: 0.5 }}
             >
               <OrderOnline />
+            </motion.div>
+          )}
+
+          {activeTab === 'story' && (
+            <motion.div
+              key="story"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Story setActiveTab={setActiveTab} onMenuClick={() => setActiveTab('menu')} />
             </motion.div>
           )}
 

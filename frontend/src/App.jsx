@@ -9,11 +9,11 @@ import Admin from './components/Admin';
 import Footer from './components/Footer';
 import OrderOnline from './components/OrderOnline';
 import Services from './components/Services';
-import Story from './components/Story';
 import IOSInstallPrompt from './components/IOSInstallPrompt';
 import Banner from './components/Banner';
 import Specialties from './components/Specialties';
-import { LeafyGreen, Salad } from 'lucide-react';
+import Galleries from './components/Galleries';
+import { LeafyGreen, Salad, Flame } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
@@ -109,40 +109,46 @@ function App() {
                 onMenuClick={() => setActiveTab('menu')}
                 onReservationClick={() => setActiveTab('reservations')}
               />
+
+              {/* Tagline Break */}
+              <section className="bg-primary text-background-light py-20 px-4 text-center border-t border-white/10">
+                <h2 className="text-3xl md:text-5xl font-serif text-accent drop-shadow-sm mb-4">
+                  Four states. One plate. Infinite flavours.
+                </h2>
+              </section>
+
               <Specialties />
-              <section className="bg-[#FFF9F2] dark:bg-leaf-green/20 py-24 overflow-hidden" id="story">
-                <div className="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <section className="bg-background-light dark:bg-primary/5 py-32 overflow-hidden" id="story">
+                <div className="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
                   <div className="relative">
-                    <div className="absolute -top-10 -left-10 size-40 bg-turmeric/20 rounded-full blur-3xl"></div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-4 pt-8">
-                        <div className="rounded-xl overflow-hidden shadow-xl" style={{ aspectRatio: '3/4' }}>
+                    <div className="absolute -top-10 -left-10 size-40 bg-accent/20 rounded-full blur-3xl"></div>
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="space-y-6 pt-8">
+                        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ aspectRatio: '3/4' }}>
                           <img className="w-full h-full object-cover" alt="Traditional Indian spice market"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGZD4b3yGO1XnNiyT51WOIVYfbDz29YMQEjB_S3V46j3_UaGtVsC7mBNsVre_vWF3j_rHCpeNSbkKkjOZWEU51b7PTVjX2KdEbW-PI4pcjnOj93SBVX7L7_ffJ2Y7GiyR2xoaN84O8RVyZ9Lat392ZBo3G6_fwRtBgDqoh2xWIQQMSL-BUy3HQwZuvokjMJb5d3nXm2b6kAZ84B05Sq3NIrxKoKNWtUEE9oPyF-2MO9PZUsdUehID5AlFkBeYZ3vZ9b4IKj5sOjrsX" />
+                            src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600" />
                         </div>
-                        <div className="rounded-xl overflow-hidden shadow-xl" style={{ aspectRatio: '1/1' }}>
+                        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ aspectRatio: '1/1' }}>
                           <img className="w-full h-full object-cover" alt="South Indian street food preparation"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTNz7HSo0yi3tt2SuY5-VT3oYpbnH68TThu1rFMQBzWYKY9oBNctT1wOOdHdX0GixT4uFCKJAPhiZ4T9quPqjdA-LhFm65BnVeZykXwMP8DJZoksxG_jKO5_dSq9nl_dUHSKv9mSpgsOA1cGUn6egqedKKudTkgETaElteQfrOH4ekvDsfe1wAplmrB8FFpyOBhIOX87ZILiqroRM7DESEBLh_ZmBa6s779a6Dj5cSwDgiyT3myHcJv9JttWaLVStDF16wX3LbqGiW" />
+                            src="https://images.unsplash.com/photo-1620244675971-d602123cc096?auto=format&fit=crop&q=80&w=600" />
                         </div>
                       </div>
-                      <div className="space-y-4">
-                        <div className="rounded-xl overflow-hidden shadow-xl" style={{ aspectRatio: '1/1' }}>
+                      <div className="space-y-6">
+                        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ aspectRatio: '1/1' }}>
                           <img className="w-full h-full object-cover" alt="Traditional South Indian kitchen setting"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTZ1jur2c8-tqwYtq92GyBU3SwoBHSis3BUCKxl-UFhNhhur1lQ8NyTuEtRpYmpusNS6cRaAxA77G36PjtuuAdyYAluCV6hckXACKzTcfa1eKlXnXo6qZJB4Dthr8XGbvOb4NCX2lyO-6Oae6_E-bH5a8FX5Ea8-ZRlwvftaVF3Q1Ftl6H95IDuVqT2kqPAXWrs7W9_sGUvU2JVQS2BESI2HbPi2XHTQi25mpZdNiYbw4WASQSpikhWnfT5HmvyLhu90GOgSpD5Zg4" />
+                            src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&q=80&w=600" />
                         </div>
-                        <div className="rounded-xl overflow-hidden shadow-xl" style={{ aspectRatio: '3/4' }}>
+                        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ aspectRatio: '3/4' }}>
                           <img className="w-full h-full object-cover" alt="Fresh organic ingredients bowl"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAAFC5AFwfQkrNkd-Wx225jZmAAREnVLtr_nACe9AVJDM8BZhpJpvdHOXm1WCHrWtqUMnXk2LfJTQHEe25-AiyslUNyCVtf9IRNkPLTl3DRYoxjRGzsSfWisTWjWQtA3GAntHqlgkkxglbKjO4uibCB8liLoWY1uK2RNDxelWXHkdpbINRK1lq_fgpg8i9UAHm7WC4WkrEyineqlYSQXgHhnjzHPO2i6y3oOFBSSNSn4nP_8Uag7MS2UBM3fvQ236EU6LEuisPFOGH" />
+                            src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&q=80&w=600" />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-6 text-secondary">
-                    <span className="font-bold tracking-[0.2em] text-sm uppercase">Tradition Meets
-                      Excellence</span>
-                    <h2 className="text-4xl md:text-5xl font-black leading-tight text-leaf-green">Our Journey
-                      From The Streets of Chennai</h2>
-                    <p className="text-lg leading-relaxed">
+                  <div className="flex flex-col gap-8 text-secondary">
+                    <span className="font-bold tracking-[0.2em] text-sm uppercase text-accent">Tradition Meets Excellence</span>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight text-primary">Our Journey From The Streets of Chennai</h2>
+                    <p className="text-lg leading-relaxed text-primary/80">
                       Started as a small family recipe handed down through three generations, The Dosa Spot was born out
                       of a passion for sharing the true soul of South Indian cuisine.
                       <br /><br />
@@ -152,30 +158,39 @@ function App() {
                     </p>
                     <div className="grid grid-cols-2 gap-8 py-4">
                       <div className="flex items-start gap-3">
-                        <Salad />
+                        <Salad className="text-accent" />
                         <div>
-                          <h4 className="font-bold">Fresh Daily</h4>
-                          <p className="text-sm opacity-70">Organic ingredients sourced every morning.</p>
+                          <h4 className="font-bold text-primary">Fresh Daily</h4>
+                          <p className="text-sm opacity-70 text-primary">Organic ingredients sourced every morning.</p>
                         </div>
                       </div>
                       <div className="flex items-start gap-3">
-                        <LeafyGreen />
+                        <LeafyGreen className="text-accent" />
                         <div>
-                          <h4 className="font-bold">Original Spices</h4>
-                          <p className="text-sm opacity-70">Ground in-house for maximum aroma.</p>
+                          <h4 className="font-bold text-primary">Original Spices</h4>
+                          <p className="text-sm opacity-70 text-primary">Ground in-house for maximum aroma.</p>
                         </div>
                       </div>
                     </div>
-                    <button
-                      onClick={() => setActiveTab('story')}
-                      className="w-fit bg-leaf-green text-white dark:bg-primary px-10 py-4 rounded-lg font-bold hover:opacity-90 transition-all cursor-pointer">
-                      Read Our Full Story
-                    </button>
                   </div>
                 </div>
               </section>
+
+              {/* Page Break Element */}
+              <section className="py-16 text-center bg-background-light">
+                <div className="flex items-center justify-center gap-6 text-primary font-bold tracking-widest uppercase text-xl md:text-2xl">
+                  <span>Spice</span>
+                  <span className="text-accent">|</span>
+                  <span>Savour</span>
+                  <span className="text-accent">|</span>
+                  <span>Smile</span>
+                </div>
+              </section>
+
+              <Galleries />
+
               {/* Quick Call to Action Banner */}
-              <div className="py-16 px-4">
+              <div className="py-8 px-4 bg-background-light pb-20">
                 <div
                   className="max-w-[900px] mx-auto bg-primary rounded-3xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl">
                   <div className="absolute -right-16 -bottom-16 size-72 bg-white/10 rounded-full"></div>
@@ -231,21 +246,6 @@ function App() {
             </motion.div>
           )}
 
-          {activeTab === 'story' && (
-            <motion.div
-              key="story"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Story
-                setActiveTab={setActiveTab}
-                onMenuClick={() => setActiveTab('menu')}
-              />
-            </motion.div>
-          )}
-
           {activeTab === 'reservations' && (
             <motion.div
               key="reservations"
@@ -269,10 +269,11 @@ function App() {
             </motion.div>
           )}
         </AnimatePresence>
-      </main>
+      </main >
 
-      {activeTab === 'home' && <Footer showMap={true} />}
-    </div>
+      {activeTab === 'home' && <Footer showMap={true} />
+      }
+    </div >
   );
 }
 

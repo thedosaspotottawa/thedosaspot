@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Instagram, Map, Download } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, Facebook, Map, Download } from 'lucide-react';
 import { usePWA } from '../hooks/usePWA';
 
 function Footer({ showMap }) {
@@ -19,6 +19,9 @@ function Footer({ showMap }) {
                     </div>
                     <div className="flex flex-col md:flex-row items-center gap-6">
                         <div className="flex gap-4">
+                            <a href="https://www.facebook.com/thedosaspot" target="_blank" rel="noopener noreferrer" className="size-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-accent hover:text-primary transition-all shadow-inner">
+                                <Facebook size={18} />
+                            </a>
                             <a href="https://www.instagram.com/the_dosaspot_ottawa/" target="_blank" rel="noopener noreferrer" className="size-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-accent hover:text-primary transition-all shadow-inner">
                                 <Instagram size={18} />
                             </a>

@@ -1156,6 +1156,36 @@
           "description": ""
         }
       ]
+    },
+    {
+      "name": "Bar & Cocktails",
+      "items": [
+        {
+          "name": "Mango Mojito",
+          "price": 10,
+          "description": "A refreshing blend of sweet mango, fresh mint, lime juice, and white rum."
+        },
+        {
+          "name": "Spiced Tamarind Margarita",
+          "price": 12,
+          "description": "Tequila, triple sec, and a tangy tamarind kick with a chili-salt rim."
+        },
+        {
+          "name": "Cardamom Old Fashioned",
+          "price": 14,
+          "description": "Classic Old Fashioned reinvented with a house-made cardamom syrup."
+        },
+        {
+          "name": "Virgin Piña Colada",
+          "price": 8,
+          "description": "A tropical mocktail with pineapple juice and creamy coconut milk."
+        },
+        {
+          "name": "Rose Water Lemonade",
+          "price": 6,
+          "description": "Fresh lemonade elevated with a subtle hint of fragrant rose water."
+        }
+      ]
     }
   ]
 }

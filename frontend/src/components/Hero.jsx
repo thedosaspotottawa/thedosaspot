@@ -1,56 +1,56 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 function Hero({ onMenuClick, onReservationClick }) {
+    const { scrollY } = useScroll();
+    const y1 = useTransform(scrollY, [0, 1000], [0, 300]);
+    const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+
     return (
-        <section className="relative h-[85vh] w-full flex items-center justify-center overflow-hidden">
-            {/* Rich Overlay for better contrast */}
-            <div
-                className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
+        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-primary">
+            {/* Parallax Background Image */}
+            <motion.div
+                className="absolute inset-0 z-0 bg-cover bg-center"
                 style={{
-                    backgroundImage: 'linear-gradient(rgba(45, 30, 18, 0.7), rgba(45, 30, 18, 0.9)), url("https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=2070&auto=format&fit=crop")',
+                    backgroundImage: 'linear-gradient(rgba(28, 58, 42, 0.4), rgba(107, 58, 42, 0.7)), url("https://images.unsplash.com/photo-1668236543090-82eba5ee5976?q=80&w=2070&auto=format&fit=crop")',
+                    y: y1,
+                    scale: 1.1 // Prevent edges showing during scroll zoom
                 }}
             />
 
-            <div className="relative z-10 text-center px-4 max-w-4xl">
+            <motion.div
+                className="relative z-10 text-center px-4 max-w-5xl"
+                style={{ opacity }}
+            >
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
                 >
-                    <h1 className="text-white text-5xl md:text-8xl font-black leading-tight tracking-tighter mb-4 drop-shadow-2xl font-display">
-                        The Dosa Spot
-                    </h1>
-                    <p className="text-accent text-xl md:text-3xl font-black mb-10 max-w-2xl mx-auto drop-shadow-lg tracking-wide">
-                        AUTHENTIC SOUTH INDIAN FLAVORS IN OTTAWA
+                    <p className="text-white/90 text-lg md:text-2xl font-serif italic mb-6 tracking-wide drop-shadow-md">
+                        Spices whisper, dosas crisp, the South calls.
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                        <button
-                            onClick={onMenuClick}
-                            className="bg-accent text-primary px-10 py-5 rounded-2xl font-black text-xl hover:shadow-[0_0_30px_rgba(229,184,46,0.3)] transition-all transform hover:scale-105 cursor-pointer"
-                        >
-                            Explore Our Menu
-                        </button>
+                    <h1
+                        className="text-white font-black leading-none tracking-tighter mb-10 drop-shadow-2xl font-display"
+                        style={{ fontSize: 'clamp(3rem, 8vw, 7rem)' }}
+                    >
+                        THE DOSA SPOT
+                    </h1>
+
+                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-8">
                         <button
                             onClick={onReservationClick}
-                            className="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-black text-xl hover:bg-white hover:text-primary transition-all transform hover:scale-105 cursor-pointer"
+                            className="bg-white text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-background-light transition-all transform hover:scale-105 cursor-pointer shadow-xl"
                         >
-                            Book a Table
+                            Reservations
+                        </button>
+                        <button
+                            onClick={onMenuClick}
+                            className="bg-transparent border border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all cursor-pointer"
+                        >
+                            Explore Menu
                         </button>
                     </div>
                 </motion.div>
-            </div>
-
-            {/* Floating Action Badge - Optional but nice to keep */}
-            <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1 }}
-                className="absolute bottom-10 right-10 hidden md:block"
-            >
-                <div className="bg-primary/90 backdrop-blur-md p-4 rounded-2xl shadow-2xl text-white text-center border border-white/20">
-                    <span className="block text-3xl font-bold">4.8</span>
-                    <span className="text-xs font-bold uppercase tracking-wider">Rating</span>
-                </div>
             </motion.div>
         </section>
     );

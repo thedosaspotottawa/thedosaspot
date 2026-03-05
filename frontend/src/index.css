@@ -2,23 +2,21 @@
 
 
 :root {
-  --primary: #16291d;
-  --secondary: #2d1e12;
-  --accent: #d4a017;
-  /* Slightly more refined gold for white background */
-  --background-light: #ffffff;
-  /* Pure white theme */
-  --background-dark: #0f0a06;
+  --primary: #1C3A2A;
+  --secondary: #6B3A2A;
+  --accent: #D4AF37;
+  /* Very subtle accent */
+  --background-light: #F4EBE1;
+  /* Solid, classy earthy tone instead of pure white */
+  --background-dark: #1A120E;
 
-  --golden: #d4a017;
-  --leaf-green: #16291d;
-  --brown: #2d1e12;
+  --golden: #D4AF37;
+  --leaf-green: #1C3A2A;
+  --brown: #6B3A2A;
 
   --text-muted: #6b7280;
-  /* Better visibility on white */
 
   color-scheme: light;
-  /* Force light scheme default */
 }
 
 .dark {

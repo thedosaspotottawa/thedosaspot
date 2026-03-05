@@ -20,24 +20,8 @@ const BackgroundPattern = ({ theme }) => {
 
     return (
         <div className={`fixed inset-0 z-[-1] overflow-hidden pointer-events-none transition-colors duration-700 ${bgColor}`}>
-            {/* Very subtle noise or gradient if needed, but for now just the solid background with leaves */}
+            {/* Very subtle noise or gradient if needed, but for now just the solid background */}
             <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')] pointer-events-none" />
-            {leaves.map((leaf) => (
-                <img
-                    key={leaf.id}
-                    src="/assets/images/leaf-twig.png"
-                    alt=""
-                    style={{
-                        position: 'absolute',
-                        top: leaf.top,
-                        left: leaf.left,
-                        width: `${leaf.size}px`,
-                        height: 'auto', // Keep aspect ratio
-                        transform: `translate(-50%, -50%) rotate(${leaf.rotation}deg) scale(${leaf.scale})`,
-                        opacity: leaf.opacity,
-                    }}
-                />
-            ))}
         </div>
     );
 };

@@ -168,7 +168,7 @@ function Reservations() {
                                     <input
                                         type="date"
                                         required
-                                        className="w-full bg-white/50 dark:bg-background-dark border border-primary/10 dark:border-white/10 rounded-xl p-4 outline-none focus:ring-2 focus:ring-accent"
+                                        className="w-full bg-white/50 dark:bg-background-dark border border-primary/10 dark:border-white/10 rounded-xl p-4 outline-none focus:ring-2 focus:ring-accent dark:text-white dark:invert-0 [&::-webkit-calendar-picker-indicator]:dark:invert"
                                         value={formData.date}
                                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                                     />
@@ -176,17 +176,17 @@ function Reservations() {
                                 <div>
                                     <label className="block text-sm font-bold text-primary dark:text-white mb-2">Time</label>
                                     <select
-                                        className="w-full bg-white/50 dark:bg-background-dark border border-primary/10 dark:border-white/10 rounded-xl p-4 outline-none focus:ring-2 focus:ring-accent"
+                                        className="w-full bg-white/50 dark:bg-background-dark border border-primary/10 dark:border-white/10 rounded-xl p-4 outline-none focus:ring-2 focus:ring-accent dark:text-white"
                                         value={formData.time}
                                         onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                                     >
-                                        <option value="11:30">11:30 AM</option>
-                                        <option value="12:00">12:00 PM</option>
-                                        <option value="13:00">1:00 PM</option>
-                                        <option value="17:00">5:00 PM</option>
-                                        <option value="18:00">6:00 PM</option>
-                                        <option value="19:00">7:00 PM</option>
-                                        <option value="20:00">8:00 PM</option>
+                                        <option value="11:30" className="dark:bg-background-dark">11:30 AM</option>
+                                        <option value="12:00" className="dark:bg-background-dark">12:00 PM</option>
+                                        <option value="13:00" className="dark:bg-background-dark">1:00 PM</option>
+                                        <option value="17:00" className="dark:bg-background-dark">5:00 PM</option>
+                                        <option value="18:00" className="dark:bg-background-dark">6:00 PM</option>
+                                        <option value="19:00" className="dark:bg-background-dark">7:00 PM</option>
+                                        <option value="20:00" className="dark:bg-background-dark">8:00 PM</option>
                                     </select>
                                 </div>
                             </div>

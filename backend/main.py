@@ -87,36 +87,46 @@ def seed_db():
     db = SessionLocal()
     menu_file = os.path.join(DATA_DIR, "menu.json")
     
-    # Check if categories already exist
-    if db.query(CategoryDB).first():
-        seed_banners(db)
-        db.close()
-        return
-
     if os.path.exists(menu_file):
         try:
             with open(menu_file, "r") as f:
                 data = json.load(f)
             for cat_data in data.get("categories", []):
-                db_cat = CategoryDB(name=cat_data["name"])
-                db.add(db_cat)
-                db.commit()
-                db.refresh(db_cat)
+                # Check if category exists, if not create it
+                db_cat = db.query(CategoryDB).filter(CategoryDB.name == cat_data["name"]).first()
+                if not db_cat:
+                    db_cat = CategoryDB(name=cat_data["name"])
+                    db.add(db_cat)
+                    db.commit()
+                    db.refresh(db_cat)
+                
+                # Check for existing items to prevent duplicates
+                existing_items = db.query(MenuItemDB.name).filter(MenuItemDB.category_id == db_cat.id).all()
+                existing_item_names = {item[0] for item in existing_items}
+                
                 for item in cat_data.get("items", []):
-                    db_item = MenuItemDB(
-                        name=item["name"],
-                        price=item["price"],
-                        description=item["description"],
-                        spicy=item.get("spicy", False),
-                        image_url=item.get("image_url"),
-                        category_id=db_cat.id
-                    )
-                    db.add(db_item)
+                    if item["name"] not in existing_item_names:
+                        db_item = MenuItemDB(
+                            name=item["name"],
+                            price=item["price"],
+                            description=item["description"],
+                            spicy=item.get("spicy", False),
+                            image_url=item.get("image_url"),
+                            category_id=db_cat.id
+                        )
+                        db.add(db_item)
+                        existing_item_names.add(item["name"])
             db.commit()
-            print(f"Successfully seeded database from {menu_file}")
+            print(f"Successfully synced database from {menu_file}")
         except Exception as e:
-            print(f"Error seeding database from file: {e}")
+            print(f"Error seeding/syncing database from file: {e}")
     else:
+        # Check if categories already exist
+        if db.query(CategoryDB).first():
+            seed_banners(db)
+            db.close()
+            return
+            
         # Hardcoded fallback seeding
         categories_data = {
             "Signature Dosas": [

@@ -17,14 +17,14 @@ function CalendarView({ reservations, onDelete }) {
     const generateCalendar = () => {
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
-        
+
         const firstDay = new Date(year, month, 1);
         const lastDay = new Date(year, month + 1, 0);
         const startingDayOfWeek = firstDay.getDay();
         const monthLength = lastDay.getDate();
 
         const days = [];
-        
+
         // Add empty cells for days before the first day of the month
         for (let i = 0; i < startingDayOfWeek; i++) {
             days.push({ date: null, bookings: [] });
@@ -33,7 +33,7 @@ function CalendarView({ reservations, onDelete }) {
         // Add days of the month with their bookings
         for (let day = 1; day <= monthLength; day++) {
             const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-            const dayBookings = reservations.filter(res => 
+            const dayBookings = reservations.filter(res =>
                 res.status === 'confirmed' && res.date === dateStr
             );
             days.push({ date: day, dateStr, bookings: dayBookings });
@@ -122,22 +122,22 @@ function CalendarView({ reservations, onDelete }) {
                 <div className="flex gap-4 mb-6 text-xs">
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-blue-500 rounded"></div>
-                        <span className="text-primary/60">Table Booking</span>
+                        <span className="text-primary/80">Table Booking</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-purple-500 rounded"></div>
-                        <span className="text-primary/60">Private Event</span>
+                        <span className="text-primary/80">Private Event</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-3 h-3 bg-orange-500 rounded"></div>
-                        <span className="text-primary/60">Catering</span>
+                        <span className="text-primary/80">Catering</span>
                     </div>
                 </div>
 
                 {/* Day Names */}
                 <div className="grid grid-cols-7 gap-2 mb-2">
                     {dayNames.map(day => (
-                        <div key={day} className="text-center font-bold text-xs text-primary/60 py-2">
+                        <div key={day} className="text-center font-bold text-xs text-primary/80 py-2">
                             {day}
                         </div>
                     ))}
@@ -151,11 +151,10 @@ function CalendarView({ reservations, onDelete }) {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: index * 0.01 }}
-                            className={`min-h-[100px] p-2 rounded-lg border ${
-                                day.date 
-                                    ? 'bg-white border-primary/20 hover:border-accent/50 transition-colors' 
+                            className={`min-h-[100px] p-2 rounded-lg border ${day.date
+                                    ? 'bg-white border-primary/20 hover:border-accent/50 transition-colors'
                                     : 'bg-gray-50 border-transparent'
-                            }`}
+                                }`}
                         >
                             {day.date && (
                                 <>
@@ -184,7 +183,7 @@ function CalendarView({ reservations, onDelete }) {
             {/* Booking Details Modal */}
             <AnimatePresence>
                 {selectedBooking && (
-                    <div 
+                    <div
                         className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
                         onClick={() => setSelectedBooking(null)}
                     >
@@ -221,15 +220,15 @@ function CalendarView({ reservations, onDelete }) {
                                     <h4 className="font-bold text-primary mb-3">Customer Information</h4>
                                     <div className="space-y-2 text-sm">
                                         <div className="flex justify-between">
-                                            <span className="text-primary/60">Name:</span>
+                                            <span className="text-primary/80">Name:</span>
                                             <span className="font-medium">{selectedBooking.name}</span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="text-primary/60">Email:</span>
+                                            <span className="text-primary/80">Email:</span>
                                             <span className="font-medium">{selectedBooking.email}</span>
                                         </div>
                                         <div className="flex justify-between">
-                                            <span className="text-primary/60">Phone:</span>
+                                            <span className="text-primary/80">Phone:</span>
                                             <span className="font-medium">{selectedBooking.phone}</span>
                                         </div>
                                     </div>
@@ -251,29 +250,29 @@ function CalendarView({ reservations, onDelete }) {
                                             <Users size={16} className="text-accent" />
                                             <span className="font-medium">{selectedBooking.guests} Guests</span>
                                         </div>
-                                        
+
                                         {/* Type-specific fields */}
                                         {(selectedBooking.booking_type === 'private_event' || selectedBooking.booking_type === 'catering') && selectedBooking.event_type && (
                                             <div className="flex justify-between">
-                                                <span className="text-primary/60">Event Type:</span>
+                                                <span className="text-primary/80">Event Type:</span>
                                                 <span className="font-medium capitalize">{selectedBooking.event_type.replace('_', ' ')}</span>
                                             </div>
                                         )}
-                                        
+
                                         {selectedBooking.booking_type === 'private_event' && selectedBooking.duration && (
                                             <div className="flex justify-between">
-                                                <span className="text-primary/60">Duration:</span>
+                                                <span className="text-primary/80">Duration:</span>
                                                 <span className="font-medium">{selectedBooking.duration}</span>
                                             </div>
                                         )}
-                                        
+
                                         {selectedBooking.booking_type === 'catering' && selectedBooking.venue && (
                                             <div className="flex items-center gap-2">
                                                 <MapPin size={16} className="text-accent" />
                                                 <span className="font-medium capitalize">{selectedBooking.venue.replace(/-/g, ' ')}</span>
                                             </div>
                                         )}
-                                        
+
                                         {selectedBooking.budget && (
                                             <div className="flex items-center gap-2">
                                                 <DollarSign size={16} className="text-accent" />
@@ -287,7 +286,7 @@ function CalendarView({ reservations, onDelete }) {
                                 {selectedBooking.special_requests && (
                                     <div className="bg-gray-50 rounded-xl p-4">
                                         <h4 className="font-bold text-primary mb-2">Special Requests</h4>
-                                        <p className="text-sm text-primary/60">{selectedBooking.special_requests}</p>
+                                        <p className="text-sm text-primary/80">{selectedBooking.special_requests}</p>
                                     </div>
                                 )}
                             </div>

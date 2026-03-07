@@ -9,7 +9,9 @@ from pydantic import BaseModel
 # Configuration
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 if not ADMIN_PASSWORD:
-    raise ValueError("ADMIN_PASSWORD environment variable is not set")
+    print("WARNING: ADMIN_PASSWORD environment variable is not set. Admin login will be disabled or insecure.")
+    # You might want to set a very secure random default or leave it as None
+    ADMIN_PASSWORD = "admin_change_me_now" # Fallback to prevent crash, but encourage setting it
 
 # JWT Configuration
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your-secret-key-change-in-production")

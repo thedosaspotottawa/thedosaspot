@@ -335,10 +335,10 @@ function Admin() {
                     <h2 className="text-3xl font-black text-primary text-center mb-8 tracking-tight">Admin Portal</h2>
                     <form onSubmit={handleLogin} className="space-y-6">
                         <div>
-                            <label className="block text-xs font-black uppercase tracking-widest text-primary/60 mb-2">Password</label>
+                            <label className="block text-xs font-black uppercase tracking-widest text-primary/80 mb-2">Password</label>
                             <input
                                 type="password"
-                                className="w-full px-5 py-4 rounded-2xl bg-white/50 border border-primary/10 focus:border-accent outline-none font-bold"
+                                className="w-full px-5 py-4 rounded-2xl bg-white border border-primary/20 focus:border-accent outline-none font-bold text-primary"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)}
                             />
@@ -364,7 +364,7 @@ function Admin() {
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h2 className="text-3xl font-bold text-primary">Management Console</h2>
-                        <p className="text-primary/60 text-sm">Welcome back, Admin.</p>
+                        <p className="text-primary/80 text-sm">Welcome back, Admin.</p>
                     </div>
                     <button
                         onClick={handleLogout}
@@ -378,31 +378,31 @@ function Admin() {
                 <div className="flex gap-2 mb-6">
                     <button
                         onClick={() => setActiveTab('reservations')}
-                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'reservations' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/60 border border-primary/30'}`}
+                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'reservations' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/80 border border-primary/30'}`}
                     >
                         Reservations
                     </button>
                     <button
                         onClick={() => setActiveTab('calendar')}
-                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'calendar' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/60 border border-primary/30'}`}
+                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'calendar' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/80 border border-primary/30'}`}
                     >
                         Calendar View
                     </button>
                     <button
                         onClick={() => setActiveTab('menu')}
-                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'menu' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/60 border border-primary/30'}`}
+                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'menu' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/80 border border-primary/30'}`}
                     >
                         Manage Menu
                     </button>
                     <button
                         onClick={() => setActiveTab('banners')}
-                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'banners' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/60 border border-primary/30'}`}
+                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'banners' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/80 border border-primary/30'}`}
                     >
                         Banners
                     </button>
                     <button
                         onClick={() => setActiveTab('timings')}
-                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'timings' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/60 border border-primary/30'}`}
+                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'timings' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/80 border border-primary/30'}`}
                     >
                         Store Timings
                     </button>
@@ -449,37 +449,37 @@ function Admin() {
                                                 </td>
                                                 <td className="px-4 py-3">
                                                     <p className="font-bold text-primary">{res.name}</p>
-                                                    <p className="text-xs text-primary/60">{res.email}</p>
-                                                    <p className="text-xs text-primary/60">{res.phone}</p>
+                                                    <p className="text-xs text-primary/80">{res.email}</p>
+                                                    <p className="text-xs text-primary/80">{res.phone}</p>
                                                 </td>
                                                 <td className="px-4 py-3">
                                                     <p className="font-medium">{res.date}</p>
-                                                    <p className="text-xs text-primary/60">{res.time}</p>
+                                                    <p className="text-xs text-primary/80">{res.time}</p>
                                                 </td>
                                                 <td className="px-4 py-3">{res.guests} Pax</td>
                                                 <td className="px-4 py-3">
                                                     {res.event_type && (
-                                                        <p className="text-xs text-primary/60">
+                                                        <p className="text-xs text-primary/80">
                                                             <span className="font-medium">Type:</span> {res.event_type}
                                                         </p>
                                                     )}
                                                     {res.duration && (
-                                                        <p className="text-xs text-primary/60">
+                                                        <p className="text-xs text-primary/80">
                                                             <span className="font-medium">Duration:</span> {res.duration}
                                                         </p>
                                                     )}
                                                     {res.venue && (
-                                                        <p className="text-xs text-primary/60">
+                                                        <p className="text-xs text-primary/80">
                                                             <span className="font-medium">Venue:</span> {res.venue}
                                                         </p>
                                                     )}
                                                     {res.budget && (
-                                                        <p className="text-xs text-primary/60">
+                                                        <p className="text-xs text-primary/80">
                                                             <span className="font-medium">Budget:</span> {res.budget}
                                                         </p>
                                                     )}
                                                     {res.special_requests && (
-                                                        <p className="text-xs text-primary/60 line-clamp-2">
+                                                        <p className="text-xs text-primary/80 line-clamp-2">
                                                             <span className="font-medium">Notes:</span> {res.special_requests}
                                                         </p>
                                                     )}
@@ -525,7 +525,7 @@ function Admin() {
                                     })}
                                     {reservations.length === 0 && (
                                         <tr>
-                                            <td colSpan="6" className="px-6 py-8 text-center text-primary/60 italic">
+                                            <td colSpan="6" className="px-6 py-8 text-center text-primary/80 italic">
                                                 No reservations found.
                                             </td>
                                         </tr>
@@ -548,7 +548,7 @@ function Admin() {
                         <div className="flex justify-between items-center bg-accent/10 p-4 rounded-xl border border-accent/20">
                             <div>
                                 <h3 className="font-bold text-primary">Menu Structure</h3>
-                                <p className="text-xs text-primary/60">Add categories before items</p>
+                                <p className="text-xs text-primary/80">Add categories before items</p>
                             </div>
                             <div className="flex gap-2">
                                 <button
@@ -572,10 +572,10 @@ function Admin() {
                                     <div className="bg-gray-50 px-6 py-3 flex justify-between items-center border-b border-primary/10">
                                         <h4 className="font-bold text-primary uppercase tracking-wider text-sm">{category.name}</h4>
                                         <div className="flex gap-2">
-                                            <button onClick={() => openEditCategory(category)} className="p-1.5 text-primary/60 hover:text-accent transition-colors">
+                                            <button onClick={() => openEditCategory(category)} className="p-1.5 text-primary/80 hover:text-accent transition-colors">
                                                 <Edit size={16} />
                                             </button>
-                                            <button onClick={() => handleDeleteCategory(category.id)} className="p-1.5 text-primary/60 hover:text-red-500 transition-colors">
+                                            <button onClick={() => handleDeleteCategory(category.id)} className="p-1.5 text-primary/80 hover:text-red-500 transition-colors">
                                                 <Trash2 size={16} />
                                             </button>
                                         </div>
@@ -588,21 +588,21 @@ function Admin() {
                                                         <span className="font-bold text-primary">{item.name}</span>
                                                         {item.spicy && <span className="text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded font-bold">SPICY</span>}
                                                     </div>
-                                                    <p className="text-xs text-primary/60 line-clamp-1">{item.description}</p>
+                                                    <p className="text-xs text-primary/80 line-clamp-1">{item.description}</p>
                                                     <p className="text-xs font-bold text-accent mt-1">${item.price.toFixed(2)}</p>
                                                 </div>
                                                 <div className="flex gap-2 ml-4">
-                                                    <button onClick={() => openEditItem(item, category.id)} className="p-2 text-primary/60 hover:text-accent border border-primary/20 rounded-lg transition-all">
+                                                    <button onClick={() => openEditItem(item, category.id)} className="p-2 text-primary/80 hover:text-accent border border-primary/20 rounded-lg transition-all">
                                                         <Edit size={16} />
                                                     </button>
-                                                    <button onClick={() => handleDeleteItem(item.id)} className="p-2 text-primary/60 hover:text-red-500 border border-primary/20 rounded-lg transition-all">
+                                                    <button onClick={() => handleDeleteItem(item.id)} className="p-2 text-primary/80 hover:text-red-500 border border-primary/20 rounded-lg transition-all">
                                                         <Trash2 size={16} />
                                                     </button>
                                                 </div>
                                             </div>
                                         ))}
                                         {category.items.length === 0 && (
-                                            <div className="px-6 py-4 text-center text-xs text-primary/60 italic">No items in this category</div>
+                                            <div className="px-6 py-4 text-center text-xs text-primary/80 italic">No items in this category</div>
                                         )}
                                     </div>
                                 </div>
@@ -616,7 +616,7 @@ function Admin() {
                         <div className="flex justify-between items-center bg-accent/10 p-4 rounded-xl border border-accent/20">
                             <div>
                                 <h3 className="font-bold text-primary">Banner Messages</h3>
-                                <p className="text-xs text-primary/60">Announcements, deals, and service alerts</p>
+                                <p className="text-xs text-primary/80">Announcements, deals, and service alerts</p>
                             </div>
                             <button
                                 onClick={() => { setEditingBanner(null); setBannerForm({ message: '', active: true }); setIsBannerModalOpen(true); }}
@@ -638,16 +638,16 @@ function Admin() {
                                         <div className={`mt-1 w-2 h-2 rounded-full ${banner.active ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]' : 'bg-gray-300'}`} />
                                         <div>
                                             <p className="text-sm text-primary font-medium">{banner.message}</p>
-                                            <p className="text-[10px] text-primary/60 mt-1 uppercase font-bold tracking-wider">
+                                            <p className="text-[10px] text-primary/80 mt-1 uppercase font-bold tracking-wider">
                                                 {banner.active ? 'Active' : 'Hidden'}
                                             </p>
                                         </div>
                                     </div>
                                     <div className="flex gap-2">
-                                        <button onClick={() => openEditBanner(banner)} className="p-2 text-primary/60 hover:text-accent border border-primary/10 rounded-lg transition-all">
+                                        <button onClick={() => openEditBanner(banner)} className="p-2 text-primary/80 hover:text-accent border border-primary/10 rounded-lg transition-all">
                                             <Edit size={16} />
                                         </button>
-                                        <button onClick={() => handleDeleteBanner(banner.id)} className="p-2 text-primary/60 hover:text-red-500 border border-primary/10 rounded-lg transition-all">
+                                        <button onClick={() => handleDeleteBanner(banner.id)} className="p-2 text-primary/80 hover:text-red-500 border border-primary/10 rounded-lg transition-all">
                                             <Trash2 size={16} />
                                         </button>
                                     </div>
@@ -656,7 +656,7 @@ function Admin() {
                             {banners.length === 0 && (
                                 <div className="text-center py-12 bg-gray-50 rounded-2xl border-2 border-dashed border-primary/20">
                                     <Megaphone className="mx-auto text-primary/10 mb-3" size={32} />
-                                    <p className="text-primary/60 italic text-sm">No banner messages active.</p>
+                                    <p className="text-primary/80 italic text-sm">No banner messages active.</p>
                                 </div>
                             )}
                         </div>
@@ -668,7 +668,7 @@ function Admin() {
                         <div className="flex justify-between items-center bg-accent/10 p-4 rounded-xl border border-accent/20">
                             <div>
                                 <h3 className="font-bold text-primary">Store Opening Hours</h3>
-                                <p className="text-xs text-primary/60">Manage your business schedule</p>
+                                <p className="text-xs text-primary/80">Manage your business schedule</p>
                             </div>
                             <button
                                 onClick={() => { setEditingTiming(null); setTimingForm({ day_range: '', hours: '', prio: timings.length + 1, is_special: false }); setIsTimingModalOpen(true); }}
@@ -692,17 +692,17 @@ function Admin() {
                                         </div>
                                         <div>
                                             <p className="text-sm text-primary font-black">{timing.day_range}</p>
-                                            <p className="text-xs text-primary/60">{timing.hours}</p>
+                                            <p className="text-xs text-primary/80">{timing.hours}</p>
                                             {timing.is_special && (
                                                 <span className="text-[10px] bg-accent/10 text-accent px-1.5 py-0.5 rounded font-black uppercase mt-1 inline-block">Special Hours</span>
                                             )}
                                         </div>
                                     </div>
                                     <div className="flex gap-2">
-                                        <button onClick={() => openEditTiming(timing)} className="p-2 text-primary/60 hover:text-accent border border-primary/10 rounded-lg transition-all">
+                                        <button onClick={() => openEditTiming(timing)} className="p-2 text-primary/80 hover:text-accent border border-primary/10 rounded-lg transition-all">
                                             <Edit size={16} />
                                         </button>
-                                        <button onClick={() => handleDeleteTiming(timing.id)} className="p-2 text-primary/60 hover:text-red-500 border border-primary/10 rounded-lg transition-all">
+                                        <button onClick={() => handleDeleteTiming(timing.id)} className="p-2 text-primary/80 hover:text-red-500 border border-primary/10 rounded-lg transition-all">
                                             <Trash2 size={16} />
                                         </button>
                                     </div>
@@ -711,7 +711,7 @@ function Admin() {
                             {timings.length === 0 && (
                                 <div className="text-center py-12 bg-gray-50 rounded-2xl border-2 border-dashed border-primary/20">
                                     <CalendarDays className="mx-auto text-primary/10 mb-3" size={32} />
-                                    <p className="text-primary/60 italic text-sm">No store timings defined.</p>
+                                    <p className="text-primary/80 italic text-sm">No store timings defined.</p>
                                 </div>
                             )}
                         </div>
@@ -726,16 +726,16 @@ function Admin() {
                         <h3 className="text-xl font-bold text-primary mb-6">{editingCategory ? 'Edit Category' : 'New Category'}</h3>
                         <form onSubmit={handleSaveCategory} className="space-y-4">
                             <div>
-                                <label className="block text-xs font-bold text-primary/60 mb-1">Category Name</label>
+                                <label className="block text-xs font-bold text-primary/80 mb-1">Category Name</label>
                                 <input
                                     required
-                                    className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm"
+                                    className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm text-primary bg-white"
                                     value={catForm.name}
                                     onChange={e => setCatForm({ name: e.target.value })}
                                 />
                             </div>
                             <div className="flex gap-3 pt-2">
-                                <button type="button" onClick={() => setIsCategoryModalOpen(false)} className="flex-1 py-2 text-primary/60 font-bold text-sm">Cancel</button>
+                                <button type="button" onClick={() => setIsCategoryModalOpen(false)} className="flex-1 py-2 text-primary/80 font-bold text-sm">Cancel</button>
                                 <button type="submit" className="flex-1 bg-primary text-white py-2 rounded-xl font-bold text-sm shadow-lg hover:shadow-accent/20 transition-all">Save</button>
                             </div>
                         </form>
@@ -750,34 +750,34 @@ function Admin() {
                         <form onSubmit={handleSaveItem} className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="col-span-2">
-                                    <label className="block text-xs font-bold text-primary/60 mb-1">Item Name</label>
-                                    <input required className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm" value={itemForm.name} onChange={e => setItemForm({ ...itemForm, name: e.target.value })} />
+                                    <label className="block text-xs font-bold text-primary/80 mb-1">Item Name</label>
+                                    <input required className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm text-primary bg-white" value={itemForm.name} onChange={e => setItemForm({ ...itemForm, name: e.target.value })} />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-primary/60 mb-1">Price ($)</label>
-                                    <input required type="number" step="0.01" className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm" value={itemForm.price} onChange={e => setItemForm({ ...itemForm, price: e.target.value })} />
+                                    <label className="block text-xs font-bold text-primary/80 mb-1">Price ($)</label>
+                                    <input required type="number" step="0.01" className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm text-primary bg-white" value={itemForm.price} onChange={e => setItemForm({ ...itemForm, price: e.target.value })} />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold text-primary/60 mb-1">Category</label>
-                                    <select className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm bg-white" value={itemForm.category_id} onChange={e => setItemForm({ ...itemForm, category_id: e.target.value })}>
+                                    <label className="block text-xs font-bold text-primary/80 mb-1">Category</label>
+                                    <select className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm bg-white text-primary" value={itemForm.category_id} onChange={e => setItemForm({ ...itemForm, category_id: e.target.value })}>
                                         {menu.categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                                     </select>
                                 </div>
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-primary/60 mb-1">Description</label>
-                                <textarea className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm h-20" value={itemForm.description} onChange={e => setItemForm({ ...itemForm, description: e.target.value })} />
+                                <label className="block text-xs font-bold text-primary/80 mb-1">Description</label>
+                                <textarea className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm h-20 text-primary bg-white" value={itemForm.description} onChange={e => setItemForm({ ...itemForm, description: e.target.value })} />
                             </div>
                             <div className="flex items-center gap-2">
                                 <input type="checkbox" id="spicy" checked={itemForm.spicy} onChange={e => setItemForm({ ...itemForm, spicy: e.target.checked })} />
-                                <label htmlFor="spicy" className="text-xs font-bold text-primary/60">Mark as Spicy</label>
+                                <label htmlFor="spicy" className="text-xs font-bold text-primary/80">Mark as Spicy</label>
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-primary/60 mb-1">Image URL (Optional)</label>
-                                <input className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm" value={itemForm.image_url} onChange={e => setItemForm({ ...itemForm, image_url: e.target.value })} />
+                                <label className="block text-xs font-bold text-primary/80 mb-1">Image URL (Optional)</label>
+                                <input className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm text-primary bg-white" value={itemForm.image_url} onChange={e => setItemForm({ ...itemForm, image_url: e.target.value })} />
                             </div>
                             <div className="flex gap-3 pt-4 border-t border-primary/10">
-                                <button type="button" onClick={() => setIsItemModalOpen(false)} className="flex-1 py-2 text-primary/60 font-bold text-sm">Cancel</button>
+                                <button type="button" onClick={() => setIsItemModalOpen(false)} className="flex-1 py-2 text-primary/80 font-bold text-sm">Cancel</button>
                                 <button type="submit" className="flex-1 bg-primary text-white py-2 rounded-xl font-bold text-sm shadow-lg hover:shadow-accent/20 transition-all">Save Item</button>
                             </div>
                         </form>
@@ -791,10 +791,10 @@ function Admin() {
                         <h3 className="text-xl font-bold text-primary mb-6">{editingBanner ? 'Edit Banner Message' : 'New Banner Message'}</h3>
                         <form onSubmit={handleSaveBanner} className="space-y-4">
                             <div>
-                                <label className="block text-xs font-bold text-primary/60 mb-1">Message</label>
+                                <label className="block text-xs font-bold text-primary/80 mb-1">Message</label>
                                 <textarea
                                     required
-                                    className="w-full px-4 py-3 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm h-32"
+                                    className="w-full px-4 py-3 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm h-32 text-primary bg-white"
                                     value={bannerForm.message}
                                     onChange={e => setBannerForm({ ...bannerForm, message: e.target.value })}
                                     placeholder="Enter deal, closure or service message..."
@@ -807,10 +807,10 @@ function Admin() {
                                     checked={bannerForm.active}
                                     onChange={e => setBannerForm({ ...bannerForm, active: e.target.checked })}
                                 />
-                                <label htmlFor="banner-active" className="text-xs font-bold text-primary/60">Active (Visible on Home Page)</label>
+                                <label htmlFor="banner-active" className="text-xs font-bold text-primary/80">Active (Visible on Home Page)</label>
                             </div>
                             <div className="flex gap-3 pt-2">
-                                <button type="button" onClick={() => setIsBannerModalOpen(false)} className="flex-1 py-2 text-primary/60 font-bold text-sm">Cancel</button>
+                                <button type="button" onClick={() => setIsBannerModalOpen(false)} className="flex-1 py-2 text-primary/80 font-bold text-sm">Cancel</button>
                                 <button type="submit" className="flex-1 bg-primary text-white py-2 rounded-xl font-bold text-sm shadow-lg hover:shadow-accent/20 transition-all">Save Message</button>
                             </div>
                         </form>
@@ -824,30 +824,30 @@ function Admin() {
                         <h3 className="text-xl font-bold text-primary mb-6">{editingTiming ? 'Edit Timing' : 'New Store Timing'}</h3>
                         <form onSubmit={handleSaveTiming} className="space-y-4">
                             <div>
-                                <label className="block text-xs font-bold text-primary/60 mb-1">Day Range</label>
+                                <label className="block text-xs font-bold text-primary/80 mb-1">Day Range</label>
                                 <input
                                     required
                                     placeholder="e.g. Mon - Thu"
-                                    className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm"
+                                    className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm text-primary bg-white"
                                     value={timingForm.day_range}
                                     onChange={e => setTimingForm({ ...timingForm, day_range: e.target.value })}
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-primary/60 mb-1">Hours</label>
+                                <label className="block text-xs font-bold text-primary/80 mb-1">Hours</label>
                                 <input
                                     required
                                     placeholder="e.g. 11 AM - 9 PM"
-                                    className="w-full px-4 py-2 rounded-xl border border-primary/10 outline-none focus:border-accent text-sm"
+                                    className="w-full px-4 py-2 rounded-xl border border-primary/10 outline-none focus:border-accent text-sm text-primary bg-white"
                                     value={timingForm.hours}
                                     onChange={e => setTimingForm({ ...timingForm, hours: e.target.value })}
                                 />
                             </div>
                             <div>
-                                <label className="block text-xs font-bold text-primary/60 mb-1">Display Priority (Order)</label>
+                                <label className="block text-xs font-bold text-primary/80 mb-1">Display Priority (Order)</label>
                                 <input
                                     type="number"
-                                    className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm"
+                                    className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm text-primary bg-white"
                                     value={timingForm.prio}
                                     onChange={e => setTimingForm({ ...timingForm, prio: parseInt(e.target.value) })}
                                 />
@@ -859,10 +859,10 @@ function Admin() {
                                     checked={timingForm.is_special}
                                     onChange={e => setTimingForm({ ...timingForm, is_special: e.target.checked })}
                                 />
-                                <label htmlFor="timing-special" className="text-xs font-bold text-primary/60">Highlight as Special (Accent Color)</label>
+                                <label htmlFor="timing-special" className="text-xs font-bold text-primary/80">Highlight as Special (Accent Color)</label>
                             </div>
                             <div className="flex gap-3 pt-2">
-                                <button type="button" onClick={() => setIsTimingModalOpen(false)} className="flex-1 py-2 text-primary/60 font-bold text-sm">Cancel</button>
+                                <button type="button" onClick={() => setIsTimingModalOpen(false)} className="flex-1 py-2 text-primary/80 font-bold text-sm">Cancel</button>
                                 <button type="submit" className="flex-1 bg-primary text-white py-2 rounded-xl font-bold text-sm shadow-lg hover:shadow-accent/20 transition-all">Save Timing</button>
                             </div>
                         </form>

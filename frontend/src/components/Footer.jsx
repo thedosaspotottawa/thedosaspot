@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Instagram, Facebook, Map, Download } from 'lucide-react';
 import { usePWA } from '../hooks/usePWA';
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 function Footer({ showMap }) {
     const { isInstallable, installPWA, isStandalone, isIOS } = usePWA();
+    const [timings, setTimings] = useState([]);
+
+    useEffect(() => {
+        const fetchTimings = async () => {
+            try {
+                const res = await axios.get(`${API_URL}/settings/timings`);
+                setTimings(res.data);
+            } catch (err) {
+                console.error("Error fetching timings:", err);
+            }
+        };
+        fetchTimings();
+    }, []);
+
     return (
         <footer className="bg-primary text-white pt-12 pb-8 border-t border-accent/20">
             <div className="max-w-7xl mx-auto px-4">
@@ -55,6 +72,10 @@ function Footer({ showMap }) {
                                 +1 613-233-7739
                             </li>
                             <li className="flex gap-4 text-white/70 items-center">
+                                <Phone className="text-accent flex-shrink-0" size={18} />
+                                +1 613-233-7738
+                            </li>
+                            <li className="flex gap-4 text-white/70 items-center">
                                 <Mail className="text-accent flex-shrink-0" size={18} />
                                 hello@thedosaspot.ca
                             </li>
@@ -64,18 +85,29 @@ function Footer({ showMap }) {
                     <div>
                         <h4 className="text-xs font-black mb-6 text-accent uppercase tracking-[0.2em]">Opening Hours</h4>
                         <ul className="space-y-3 text-white/60 text-sm font-light">
-                            <li className="flex justify-between">
-                                <span>Mon - Thu</span>
-                                <span className="text-white font-medium">11 AM - 9 PM</span>
-                            </li>
-                            <li className="flex justify-between text-accent font-bold py-1">
-                                <span>Fri - Sat</span>
-                                <span className="font-black">11 AM - 11 PM</span>
-                            </li>
-                            <li className="flex justify-between">
-                                <span>Sunday</span>
-                                <span className="text-white font-medium">11 AM - 10 PM</span>
-                            </li>
+                            {timings.length > 0 ? (
+                                timings.map((t) => (
+                                    <li key={t.id} className={`flex justify-between ${t.is_special ? 'text-accent font-bold py-1' : ''}`}>
+                                        <span className={t.is_special ? '' : ''}>{t.day_range}</span>
+                                        <span className={t.is_special ? 'font-black' : 'text-white font-medium'}>{t.hours}</span>
+                                    </li>
+                                ))
+                            ) : (
+                                <>
+                                    <li className="flex justify-between">
+                                        <span>Mon - Thu</span>
+                                        <span className="text-white font-medium">11 AM - 9 PM</span>
+                                    </li>
+                                    <li className="flex justify-between text-accent font-bold py-1">
+                                        <span>Fri - Sat</span>
+                                        <span className="font-black">11 AM - 11 PM</span>
+                                    </li>
+                                    <li className="flex justify-between">
+                                        <span>Sunday</span>
+                                        <span className="text-white font-medium">11 AM - 10 PM</span>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </div>
                     {showMap && (
@@ -105,3 +137,4 @@ function Footer({ showMap }) {
 }
 
 export default Footer;
+

@@ -46,3 +46,12 @@ class BannerDB(Base):
     message = Column(Text, nullable=False)
     active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
+
+class StoreTimingDB(Base):
+    __tablename__ = "store_timings"
+    id = Column(Integer, primary_key=True, index=True)
+    day_range = Column(String)  # e.g. "Mon - Thu"
+    hours = Column(String)      # e.g. "11 AM - 9 PM"
+    prio = Column(Integer, default=0) # for sorting if needed
+    is_special = Column(Boolean, default=False) # for highlighting like Fri-Sat
+

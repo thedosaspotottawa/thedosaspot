@@ -13,20 +13,24 @@ function Admin() {
     const [reservations, setReservations] = useState([]);
     const [menu, setMenu] = useState({ categories: [] });
     const [banners, setBanners] = useState([]);
+    const [timings, setTimings] = useState([]);
     const [activeTab, setActiveTab] = useState('reservations');
 
     // Modal states
     const [isItemModalOpen, setIsItemModalOpen] = useState(false);
     const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
     const [isBannerModalOpen, setIsBannerModalOpen] = useState(false);
+    const [isTimingModalOpen, setIsTimingModalOpen] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
     const [editingCategory, setEditingCategory] = useState(null);
     const [editingBanner, setEditingBanner] = useState(null);
+    const [editingTiming, setEditingTiming] = useState(null);
 
     // Form states
     const [itemForm, setItemForm] = useState({ name: '', price: '', description: '', spicy: false, image_url: '', category_id: '' });
     const [catForm, setCatForm] = useState({ name: '' });
     const [bannerForm, setBannerForm] = useState({ message: '', active: true });
+    const [timingForm, setTimingForm] = useState({ day_range: '', hours: '', prio: 0, is_special: false });
 
     // Check for existing token on mount
     useEffect(() => {
@@ -42,6 +46,7 @@ function Admin() {
             fetchReservations();
             fetchMenu();
             fetchBanners();
+            fetchTimings();
         }
     }, [isAuthenticated]);
 
@@ -249,6 +254,55 @@ function Admin() {
         }
     };
 
+    const fetchTimings = async () => {
+        try {
+            const res = await axios.get(`${API_URL}/settings/timings`);
+            setTimings(res.data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleSaveTiming = async (e) => {
+        e.preventDefault();
+        try {
+            const payload = { ...timingForm };
+            if (editingTiming) {
+                await axios.put(`${API_URL}/settings/timings/${editingTiming.id}`, payload, getAuthHeaders());
+            } else {
+                await axios.post(`${API_URL}/settings/timings`, payload, getAuthHeaders());
+            }
+            setIsTimingModalOpen(false);
+            setEditingTiming(null);
+            setTimingForm({ day_range: '', hours: '', prio: 0, is_special: false });
+            fetchTimings();
+        } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
+            alert(err.response?.data?.detail || 'Error saving timing');
+        }
+    };
+
+    const handleDeleteTiming = async (id) => {
+        if (!confirm('Are you sure you want to delete this timing?')) return;
+        try {
+            await axios.delete(`${API_URL}/settings/timings/${id}`, getAuthHeaders());
+            fetchTimings();
+        } catch (err) {
+            if (err.response?.status === 401) {
+                handleLogout();
+            }
+            alert('Error deleting timing');
+        }
+    };
+
+    const openEditTiming = (timing) => {
+        setEditingTiming(timing);
+        setTimingForm({ day_range: timing.day_range, hours: timing.hours, prio: timing.prio, is_special: timing.is_special });
+        setIsTimingModalOpen(true);
+    };
+
     const openEditItem = (item, catId) => {
         setEditingItem(item);
         setItemForm({ ...item, category_id: catId });
@@ -345,6 +399,12 @@ function Admin() {
                         className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'banners' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/60 border border-primary/30'}`}
                     >
                         Banners
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('timings')}
+                        className={`px-4 py-1.5 rounded-full font-bold text-sm transition-all ${activeTab === 'timings' ? 'bg-primary text-white shadow-md' : 'bg-white text-primary/60 border border-primary/30'}`}
+                    >
+                        Store Timings
                     </button>
                 </div>
 
@@ -602,6 +662,61 @@ function Admin() {
                         </div>
                     </div>
                 )}
+
+                {activeTab === 'timings' && (
+                    <div className="space-y-6">
+                        <div className="flex justify-between items-center bg-accent/10 p-4 rounded-xl border border-accent/20">
+                            <div>
+                                <h3 className="font-bold text-primary">Store Opening Hours</h3>
+                                <p className="text-xs text-primary/60">Manage your business schedule</p>
+                            </div>
+                            <button
+                                onClick={() => { setEditingTiming(null); setTimingForm({ day_range: '', hours: '', prio: timings.length + 1, is_special: false }); setIsTimingModalOpen(true); }}
+                                className="bg-primary text-white px-3 py-1.5 rounded-lg font-bold text-xs flex items-center gap-2 hover:bg-secondary transition-all"
+                            >
+                                <Plus size={14} /> Add Timing
+                            </button>
+                        </div>
+
+                        <div className="grid gap-4">
+                            {timings.map((timing) => (
+                                <motion.div
+                                    key={timing.id}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="bg-white p-4 rounded-xl shadow-sm border border-primary/10 flex justify-between items-center hover:border-accent/30 transition-all"
+                                >
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 bg-primary/5 rounded-full flex items-center justify-center text-primary font-bold">
+                                            {timing.prio}
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-primary font-black">{timing.day_range}</p>
+                                            <p className="text-xs text-primary/60">{timing.hours}</p>
+                                            {timing.is_special && (
+                                                <span className="text-[10px] bg-accent/10 text-accent px-1.5 py-0.5 rounded font-black uppercase mt-1 inline-block">Special Hours</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <button onClick={() => openEditTiming(timing)} className="p-2 text-primary/60 hover:text-accent border border-primary/10 rounded-lg transition-all">
+                                            <Edit size={16} />
+                                        </button>
+                                        <button onClick={() => handleDeleteTiming(timing.id)} className="p-2 text-primary/60 hover:text-red-500 border border-primary/10 rounded-lg transition-all">
+                                            <Trash2 size={16} />
+                                        </button>
+                                    </div>
+                                </motion.div>
+                            ))}
+                            {timings.length === 0 && (
+                                <div className="text-center py-12 bg-gray-50 rounded-2xl border-2 border-dashed border-primary/20">
+                                    <CalendarDays className="mx-auto text-primary/10 mb-3" size={32} />
+                                    <p className="text-primary/60 italic text-sm">No store timings defined.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Modals */}
@@ -697,6 +812,58 @@ function Admin() {
                             <div className="flex gap-3 pt-2">
                                 <button type="button" onClick={() => setIsBannerModalOpen(false)} className="flex-1 py-2 text-primary/60 font-bold text-sm">Cancel</button>
                                 <button type="submit" className="flex-1 bg-primary text-white py-2 rounded-xl font-bold text-sm shadow-lg hover:shadow-accent/20 transition-all">Save Message</button>
+                            </div>
+                        </form>
+                    </motion.div>
+                </div>
+            )}
+
+            {isTimingModalOpen && (
+                <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+                    <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl">
+                        <h3 className="text-xl font-bold text-primary mb-6">{editingTiming ? 'Edit Timing' : 'New Store Timing'}</h3>
+                        <form onSubmit={handleSaveTiming} className="space-y-4">
+                            <div>
+                                <label className="block text-xs font-bold text-primary/60 mb-1">Day Range</label>
+                                <input
+                                    required
+                                    placeholder="e.g. Mon - Thu"
+                                    className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm"
+                                    value={timingForm.day_range}
+                                    onChange={e => setTimingForm({ ...timingForm, day_range: e.target.value })}
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-primary/60 mb-1">Hours</label>
+                                <input
+                                    required
+                                    placeholder="e.g. 11 AM - 9 PM"
+                                    className="w-full px-4 py-2 rounded-xl border border-primary/10 outline-none focus:border-accent text-sm"
+                                    value={timingForm.hours}
+                                    onChange={e => setTimingForm({ ...timingForm, hours: e.target.value })}
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-bold text-primary/60 mb-1">Display Priority (Order)</label>
+                                <input
+                                    type="number"
+                                    className="w-full px-4 py-2 rounded-xl border border-primary/30 outline-none focus:border-accent text-sm"
+                                    value={timingForm.prio}
+                                    onChange={e => setTimingForm({ ...timingForm, prio: parseInt(e.target.value) })}
+                                />
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="timing-special"
+                                    checked={timingForm.is_special}
+                                    onChange={e => setTimingForm({ ...timingForm, is_special: e.target.checked })}
+                                />
+                                <label htmlFor="timing-special" className="text-xs font-bold text-primary/60">Highlight as Special (Accent Color)</label>
+                            </div>
+                            <div className="flex gap-3 pt-2">
+                                <button type="button" onClick={() => setIsTimingModalOpen(false)} className="flex-1 py-2 text-primary/60 font-bold text-sm">Cancel</button>
+                                <button type="submit" className="flex-1 bg-primary text-white py-2 rounded-xl font-bold text-sm shadow-lg hover:shadow-accent/20 transition-all">Save Timing</button>
                             </div>
                         </form>
                     </motion.div>

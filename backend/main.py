@@ -5,8 +5,8 @@ import os
 from sqlalchemy.orm import Session
 from sqlalchemy import text, inspect
 from database import engine, Base, SessionLocal, DATA_DIR
-from models import CategoryDB, MenuItemDB, BannerDB
-from routers import menu, reservations, banners
+from models import CategoryDB, MenuItemDB, BannerDB, StoreTimingDB
+from routers import menu, reservations, banners, settings
 from auth import verify_password, create_access_token, AdminLoginRequest, AdminLoginResponse
 
 # Create tables
@@ -35,6 +35,7 @@ app.add_middleware(
 app.include_router(menu.router)
 app.include_router(reservations.router)
 app.include_router(banners.router)
+app.include_router(settings.router)
 
 @app.get("/")
 def read_root():
@@ -83,6 +84,20 @@ def seed_banners(db: Session):
             db.add(BannerDB(message=msg, active=True))
         db.commit()
 
+def seed_timings(db: Session):
+    if db.query(StoreTimingDB).first():
+        return
+    
+    initial_timings = [
+        {"day_range": "Mon - Thu", "hours": "11 AM - 9 PM", "prio": 1, "is_special": False},
+        {"day_range": "Fri - Sat", "hours": "11 AM - 11 PM", "prio": 2, "is_special": True},
+        {"day_range": "Sunday", "hours": "11 AM - 10 PM", "prio": 3, "is_special": False}
+    ]
+    for t in initial_timings:
+        db.add(StoreTimingDB(**t))
+    db.commit()
+    print("Successfully seeded store timings")
+
 def seed_db():
     db = SessionLocal()
     menu_file = os.path.join(DATA_DIR, "menu.json")
@@ -124,6 +139,7 @@ def seed_db():
         # Check if categories already exist
         if db.query(CategoryDB).first():
             seed_banners(db)
+            seed_timings(db)
             db.close()
             return
             
@@ -150,6 +166,7 @@ def seed_db():
         db.commit()
 
     seed_banners(db)
+    seed_timings(db)
     db.close()
 
 @app.on_event("startup")

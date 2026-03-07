@@ -63,3 +63,17 @@ class Banner(BannerBase):
 
 class BannerCreate(BannerBase):
     pass
+
+class StoreTimingBase(BaseModel):
+    day_range: str
+    hours: str
+    prio: Optional[int] = 0
+    is_special: Optional[bool] = False
+
+class StoreTiming(StoreTimingBase):
+    id: int
+    class Config:
+        from_attributes = True
+
+class StoreTimingCreate(StoreTimingBase):
+    pass
